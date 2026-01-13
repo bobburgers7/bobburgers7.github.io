@@ -153,7 +153,6 @@
         <!-- Privacy Banner -->
         <div style="background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%); padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 2px solid #2e7d32;">
             <div style="display: flex; align-items: center; gap: 15px; color: white;">
-                <div style="font-size: 40px;">🔒</div>
                 <div>
                     <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">100% Private & Secure</div>
                     <div style="font-size: 14px; line-height: 1.6;">
@@ -186,7 +185,7 @@
                         <li><strong>Explore the breakdown:</strong> Click the collapsed sections to see detailed year-by-year tax calculations</li>
                     </ol>
 
-                    <p style="margin-top: 20px; font-weight: bold; color: #667eea;">💡 Key Features:</p>
+                    <p style="margin-top: 20px; font-weight: bold; color: #667eea;">Key Features:</p>
                     <ul style="margin: 10px 0; padding-left: 25px;">
                         <li><strong>Comprehensive tax modeling:</strong> Includes federal/state taxes, IRMAA surcharges, and Social Security taxation</li>
                         <li><strong>Roth conversion optimization:</strong> Automatically fills up to your target tax bracket during retirement</li>
@@ -195,7 +194,7 @@
                     </ul>
 
                     <p style="margin-top: 20px; padding: 12px; background: #fff3cd; border-left: 3px solid #ffc107; border-radius: 4px;">
-                        <strong>⚠️ Important:</strong> This is a planning tool, not financial advice. Tax laws change, and individual situations vary. Consider consulting a tax professional or financial advisor for personalized guidance.
+                        <strong>Important:</strong> This is a planning tool, not financial advice. Tax laws change, and individual situations vary. Consider consulting a tax professional or financial advisor for personalized guidance.
                     </p>
                 </div>
             </div>
@@ -204,6 +203,8 @@
         <div class="calculator-section">
             <h2>Calculator Inputs</h2>
 
+            <!-- Personal Information -->
+            <h3 style="color: #4CAF50; margin-top: 20px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Personal Information</h3>
             <div class="input-grid">
                 <div class="input-group">
                     <label for="currentAge">Current Age (in 2026)</label>
@@ -211,55 +212,108 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="totalIncome">Total Income for 2026 ($)</label>
-                    <input type="number" id="totalIncome" value="100000" min="0" step="1000">
-                </div>
-
-                <div class="input-group">
-                    <label for="current401k">Current Traditional 401k Balance ($)</label>
-                    <input type="number" id="current401k" value="50000" min="0" step="1000">
-                </div>
-
-                <div class="input-group">
-                    <label for="currentRoth401k">Current Roth 401k Balance ($)</label>
-                    <input type="number" id="currentRoth401k" value="0" min="0" step="1000">
-                </div>
-
-                <div class="input-group">
-                    <label for="total401kBudget">Total Annual 401k Budget (Employee + Employer) ($)</label>
-                    <input type="number" id="total401kBudget" value="72000" min="0" max="72000" step="1000">
-                    <small style="color: #666; font-size: 12px;">Max: $72,000 (2026 limit)</small>
-                </div>
-
-                <div class="input-group">
-                    <label for="taxableAccountSize">Taxable Account Balance (VTI) ($)</label>
-                    <input type="number" id="taxableAccountSize" value="0" min="0" step="1000">
-                </div>
-
-                <div class="input-group">
-                    <label for="enableDefinedBenefit">Enable Defined Benefit Plan?</label>
-                    <input type="checkbox" id="enableDefinedBenefit" style="width: auto; margin-left: 10px;">
-                </div>
-
-                <div class="input-group" id="definedBenefitGroup" style="display: none;">
-                    <label for="annualDBContribution">Annual Defined Benefit Contribution ($)</label>
-                    <input type="number" id="annualDBContribution" value="40000" min="2500" max="400000" step="1000">
-                    <small style="color: #666; font-size: 12px;">Min: $2,500 | Typical max: ~$40,000-$400,000 depending on age/income</small>
-                </div>
-
-                <div class="input-group" id="dbRolloverGroup" style="display: none;">
-                    <label for="rolloverDBToIRA">Rollover DB to Traditional IRA at retirement?</label>
-                    <input type="checkbox" id="rolloverDBToIRA" style="width: auto; margin-left: 10px;" checked>
-                    <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">If checked, DB balance rolls into Traditional IRA (subject to RMDs). If unchecked, treated as separate lump sum.</small>
-                </div>
-
-                <div class="input-group">
-                    <label for="retirementAge">Retirement Age</label>
+                    <label for="retirementAge">Planned Retirement Age</label>
                     <input type="number" id="retirementAge" value="59" min="50" max="80" step="1">
                 </div>
 
                 <div class="input-group">
-                    <label for="workingState">Working Years State (Current)</label>
+                    <label for="totalIncome">Current Annual Income ($)</label>
+                    <input type="number" id="totalIncome" value="100000" min="0" step="1000">
+                </div>
+
+                <div class="input-group">
+                    <label for="modelWidowhood" style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="modelWidowhood" style="width: auto; margin: 0;">
+                        <span style="font-weight: bold; color: #c62828;">Model widowhood (single filing from age 75)</span>
+                    </label>
+                    <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">
+                        Models transition to Single filing status. <strong style="color: #c62828;">CUTS TAX BRACKETS IN HALF</strong>. Critical for women (typically outlive men by 5-7 years). Same $100k income jumps from 22% to 32% bracket.
+                    </small>
+                </div>
+            </div>
+
+            <!-- Account Balances -->
+            <h3 style="color: #4CAF50; margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Current Account Balances</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="current401k">Traditional 401k Balance ($)</label>
+                    <input type="number" id="current401k" value="50000" min="0" step="1000">
+                </div>
+
+                <div class="input-group">
+                    <label for="currentRoth401k">Roth 401k Balance ($)</label>
+                    <input type="number" id="currentRoth401k" value="0" min="0" step="1000">
+                </div>
+
+                <div class="input-group">
+                    <label for="taxableAccountSize">Taxable Account Balance ($)</label>
+                    <input type="number" id="taxableAccountSize" value="0" min="0" step="1000">
+                    <small style="color: #666; font-size: 13px;">VTI or similar broad market fund</small>
+                </div>
+            </div>
+
+            <!-- Contribution Plan -->
+            <h3 style="color: #4CAF50; margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Annual Contribution Budget</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="total401kBudget">Total 401k Budget (Employee + Employer) ($)</label>
+                    <input type="number" id="total401kBudget" value="72000" min="0" max="72000" step="1000">
+                    <small style="color: #666; font-size: 13px;">2026 limit: $72,000</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="enableDefinedBenefit" style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="enableDefinedBenefit" style="width: auto; margin: 0;">
+                        <span>Have Defined Benefit Plan?</span>
+                    </label>
+                    <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">Solo 401k with DB component (doctors/business owners)</small>
+                </div>
+
+                <div class="input-group" id="definedBenefitGroup" style="display: none;">
+                    <label for="annualDBContribution">Annual DB Contribution ($)</label>
+                    <input type="number" id="annualDBContribution" value="40000" min="2500" max="400000" step="1000">
+                    <small style="color: #666; font-size: 13px;">Min: $2,500 | Max varies by age/income</small>
+                </div>
+
+                <div class="input-group" id="dbRolloverGroup" style="display: none;">
+                    <label for="rolloverDBToIRA" style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="rolloverDBToIRA" checked style="width: auto; margin: 0;">
+                        <span>Rollover DB to Traditional IRA at retirement?</span>
+                    </label>
+                    <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">If checked: Subject to RMDs. If unchecked: Separate lump sum.</small>
+                </div>
+            </div>
+
+            <!-- Retirement Income Sources -->
+            <h3 style="color: #4CAF50; margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Expected Retirement Income</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="pensionIncome">Annual Pension/Annuity Income ($)</label>
+                    <input type="number" id="pensionIncome" value="0" min="0" max="500000" step="1000">
+                    <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">
+                        In 2026 dollars. <strong style="color: #c62828;">CRITICAL: Pushes you into higher brackets</strong>, making Traditional less advantageous. <em>Do NOT include Social Security (separate input below).</em>
+                    </small>
+                </div>
+
+                <div class="input-group">
+                    <label for="enableSocialSecurity" style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="enableSocialSecurity" checked style="width: auto; margin: 0;">
+                        <span>Include Social Security?</span>
+                    </label>
+                </div>
+
+                <div class="input-group" id="socialSecurityInputGroup">
+                    <label for="socialSecurityBenefit">Annual Social Security (at age 70) ($)</label>
+                    <input type="number" id="socialSecurityBenefit" value="40000" min="0" step="1000">
+                    <small style="color: #666; font-size: 13px;">Delayed to age 70 for maximum benefit</small>
+                </div>
+            </div>
+
+            <!-- State Tax Planning -->
+            <h3 style="color: #4CAF50; margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">State Tax Planning</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="workingState">State During Working Years</label>
                     <select id="workingState" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
                         <option value="CA">California</option>
                         <optgroup label="No State Income Tax">
@@ -277,7 +331,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="retirementState">Retirement State</label>
+                    <label for="retirementState">State During Retirement</label>
                     <select id="retirementState" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
                         <option value="CA">California</option>
                         <optgroup label="No State Income Tax">
@@ -293,18 +347,25 @@
                         </optgroup>
                     </select>
                 </div>
+            </div>
 
+            <!-- Roth Conversion Strategy -->
+            <h3 style="color: #4CAF50; margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Roth Conversion Strategy (Ages 59-74)</h3>
+            <div class="input-grid">
                 <div class="input-group">
-                    <label for="conversionStrategy">Roth Conversion Strategy</label>
+                    <label for="conversionStrategy">Conversion Approach</label>
                     <select id="conversionStrategy" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
-                        <option value="auto-0">Auto: Fill up to 0% bracket (Max benefit - requires gap year)</option>
-                        <option value="auto-10">Auto: Fill up to 10% bracket</option>
-                        <option value="auto-12">Auto: Fill up to 12% bracket (Recommended)</option>
-                        <option value="auto-22">Auto: Fill up to 22% bracket</option>
-                        <option value="auto-24">Auto: Fill up to 24% bracket</option>
-                        <option value="auto-32">Auto: Fill up to 32% bracket</option>
-                        <option value="manual">Manual: Specify fixed amount</option>
+                        <option value="auto-0">Auto: Fill 0% bracket (Max benefit - gap year required)</option>
+                        <option value="auto-10">Auto: Fill 10% bracket</option>
+                        <option value="auto-12">Auto: Fill 12% bracket (Recommended)</option>
+                        <option value="auto-22">Auto: Fill 22% bracket</option>
+                        <option value="auto-24">Auto: Fill 24% bracket</option>
+                        <option value="auto-32">Auto: Fill 32% bracket</option>
+                        <option value="manual">Manual: Fixed amount</option>
                     </select>
+                    <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">
+                        Lower brackets (0-12%) have best results. See McQuarrie research.
+                    </small>
                 </div>
 
                 <div class="input-group" id="manualConversionGroup" style="display: none;">
@@ -315,35 +376,26 @@
                 <div class="input-group">
                     <label for="conversionTaxSource">Pay Conversion Tax From</label>
                     <select id="conversionTaxSource" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
-                        <option value="converted-funds">Converted Funds (McQuarrie Base Case - most conservative)</option>
-                        <option value="taxable-account">Taxable Account (requires sufficient balance)</option>
+                        <option value="converted-funds">Converted Funds (Recommended - most conservative)</option>
+                        <option value="taxable-account">Taxable Account (requires large balance)</option>
                     </select>
-                    <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">
-                        McQuarrie recommends "Converted Funds" as the base case. "Taxable Account" requires large taxable balances and may overstate benefits.
+                    <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">
+                        McQuarrie base case: Pay from converted funds. External payment only improves breakeven by ~1 year.
                     </small>
-                </div>
-
-                <div class="input-group">
-                    <label for="socialSecurityBenefit">Annual Social Security (at age 70) ($)</label>
-                    <input type="number" id="socialSecurityBenefit" value="40000" min="0" step="1000">
-                </div>
-
-                <div class="input-group">
-                    <label for="enableSocialSecurity" style="display: flex; align-items: center; gap: 8px;">
-                        <input type="checkbox" id="enableSocialSecurity" checked style="width: auto; margin: 0;">
-                        <span>Include Social Security</span>
-                    </label>
                 </div>
             </div>
 
+            <!-- Investment Assumptions -->
+            <h3 style="color: #4CAF50; margin-top: 25px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Investment Assumptions</h3>
+
             <div class="slider-group">
-                <label for="cagrSlider">Expected CAGR (Annual Growth Rate)</label>
+                <label for="cagrSlider">Expected Investment Return (CAGR)</label>
                 <div class="slider-container">
                     <input type="range" id="cagrSlider" min="0" max="15" step="0.5" value="5">
                     <span class="slider-value" id="cagrValue">5.0%</span>
                 </div>
-                <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">
-                    Nominal return on investments. McQuarrie uses 7% for working years (aggressive allocation), 5.2% for retirement (conservative). Default 5% is reasonable blended rate.
+                <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">
+                    Nominal annual return. McQuarrie: 7% (working), 5.2% (retired). Default 5% is conservative blended rate.
                 </small>
             </div>
 
@@ -353,21 +405,23 @@
                     <input type="range" id="inflationSlider" min="0" max="10" step="0.5" value="3">
                     <span class="slider-value" id="inflationValue">3.0%</span>
                 </div>
-                <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">
-                    Annual inflation rate. McQuarrie uses 2.5% (actual 1989-2019 average). Default 3% is slightly conservative.
+                <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">
+                    Annual inflation. McQuarrie uses 2.5% (1989-2019 average). Default 3% is slightly conservative.
                 </small>
             </div>
 
-            <div class="input-group">
-                <label for="showRealDollars" style="display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" id="showRealDollars" style="width: auto; margin: 0;">
-                    Show results in inflation-adjusted (real) dollars
-                </label>
-                <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">
-                    <strong>Real dollars:</strong> Adjusts future values to today's purchasing power (e.g., "$1M in 2026 dollars").
-                    <strong>Nominal dollars:</strong> Shows actual future dollar amounts (e.g., "$2.5M at age 90").
-                    Real dollars help avoid "money illusion" from inflation-inflated numbers. McQuarrie recommends using real dollars for clearer comparisons.
-                </small>
+            <div class="input-grid" style="margin-top: 20px;">
+                <div class="input-group">
+                    <label for="showRealDollars" style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="showRealDollars" style="width: auto; margin: 0;">
+                        <span>Show results in inflation-adjusted dollars</span>
+                    </label>
+                    <small style="color: #666; font-size: 13px; display: block; margin-top: 5px;">
+                        <strong>Real dollars:</strong> Today's purchasing power (e.g., "$1M in 2026 dollars").<br>
+                        <strong>Nominal dollars:</strong> Actual future amounts (e.g., "$2.5M at age 90").<br>
+                        Real dollars avoid "money illusion" and are recommended by McQuarrie.
+                    </small>
+                </div>
             </div>
 
             <div id="scenarioComparison" style="margin-top: 30px;"></div>
@@ -599,6 +653,20 @@
             updatePlot();
         });
 
+        // Toggle Social Security input visibility based on checkbox
+        function toggleSocialSecurityInput() {
+            const enableSocialSecurity = document.getElementById('enableSocialSecurity').checked;
+            const ssInputGroup = document.getElementById('socialSecurityInputGroup');
+            if (enableSocialSecurity) {
+                ssInputGroup.style.display = 'block';
+            } else {
+                ssInputGroup.style.display = 'none';
+            }
+        }
+
+        // Set initial visibility on page load
+        toggleSocialSecurityInput();
+
         // Update slider values display
         document.getElementById('cagrSlider').addEventListener('input', function(e) {
             document.getElementById('cagrValue').textContent = parseFloat(e.target.value).toFixed(1) + '%';
@@ -622,18 +690,23 @@
         document.getElementById('total401kBudget').addEventListener('input', updatePlot);
         document.getElementById('taxableAccountSize').addEventListener('input', updatePlot);
         document.getElementById('retirementAge').addEventListener('input', updatePlot);
+        document.getElementById('pensionIncome').addEventListener('input', updatePlot);
         document.getElementById('workingState').addEventListener('change', updatePlot);
         document.getElementById('retirementState').addEventListener('change', updatePlot);
         document.getElementById('annualConversion').addEventListener('input', updatePlot);
         document.getElementById('socialSecurityBenefit').addEventListener('input', updatePlot);
-        document.getElementById('enableSocialSecurity').addEventListener('change', updatePlot);
+        document.getElementById('enableSocialSecurity').addEventListener('change', function() {
+            toggleSocialSecurityInput();
+            updatePlot();
+        });
         document.getElementById('annualDBContribution').addEventListener('input', updatePlot);
         document.getElementById('rolloverDBToIRA').addEventListener('change', updatePlot);
         document.getElementById('conversionTaxSource').addEventListener('change', updatePlot);
         document.getElementById('showRealDollars').addEventListener('change', updatePlot);
+        document.getElementById('modelWidowhood').addEventListener('change', updatePlot);
 
         // 2026 Federal Tax Brackets for Single Filers (will be adjusted for inflation in future years)
-        const federalBrackets2026 = [
+        const federalBrackets2026Single = [
             { rate: 0.10, min: 0, max: 12400 },
             { rate: 0.12, min: 12401, max: 50400 },
             { rate: 0.22, min: 50401, max: 105700 },
@@ -642,6 +715,20 @@
             { rate: 0.35, min: 256226, max: 640600 },
             { rate: 0.37, min: 640601, max: Infinity }
         ];
+
+        // 2026 Federal Tax Brackets for Married Filing Jointly (approximately double single brackets)
+        const federalBrackets2026MFJ = [
+            { rate: 0.10, min: 0, max: 24800 },
+            { rate: 0.12, min: 24801, max: 100800 },
+            { rate: 0.22, min: 100801, max: 211400 },
+            { rate: 0.24, min: 211401, max: 403550 },
+            { rate: 0.32, min: 403551, max: 512450 },
+            { rate: 0.35, min: 512451, max: 1281200 },
+            { rate: 0.37, min: 1281201, max: Infinity }
+        ];
+
+        // Default to MFJ brackets (most common scenario for retirement planning)
+        const federalBrackets2026 = federalBrackets2026MFJ;
 
         // 2026 California Tax Brackets for Single Filers
         const caBrackets2026 = [
@@ -1001,10 +1088,16 @@
             let taxableAccountRMDTaxes = 0;
             let totalIRMAA = 0;
             let totalRMDNIIT = 0;
+            const modelWidowhood = document.getElementById('modelWidowhood').checked;
+
             for (let age = rmdAge; age <= 90; age++) {
                 const yearNumber = retirementYear + (age - retirementAge);
                 const yearsFromNow = yearNumber - currentYear;
                 const inflationMultiplier = Math.pow(1 + inflation, yearsFromNow);
+
+                // Widowhood: use Single brackets if age >= 75 and widowhood is modeled
+                const useWidowBrackets = modelWidowhood && age >= 75;
+                const activeFederalBrackets = useWidowBrackets ? federalBrackets2026Single : federalBrackets2026MFJ;
 
                 // Grow taxable account
                 taxableBalance *= (1 + cagr);
@@ -1021,17 +1114,20 @@
                     rmd = tradBalance / rmdDivisors[age];
                 }
 
-                if (rmd > 0 || vtiDividendIncome > 0 || socialSecurity > 0) {
+                if (rmd > 0 || vtiDividendIncome > 0 || socialSecurity > 0 || pensionIncome > 0) {
                     const adjustedStandardDeduction = standardDeduction2026 * inflationMultiplier;
 
-                    // Calculate taxable Social Security using tax torpedo formula
-                    const taxableSS = calculateTaxableSS(socialSecurity, rmd + vtiDividendIncome, adjustedStandardDeduction);
+                    // Apply inflation to pension income
+                    const inflatedPensionIncome = pensionIncome * inflationMultiplier;
 
-                    // Total ordinary income for federal tax
-                    const ordinaryIncome = Math.max(0, rmd + taxableSS - adjustedStandardDeduction);
+                    // Calculate taxable Social Security using tax torpedo formula (includes pension income in provisional income)
+                    const taxableSS = calculateTaxableSS(socialSecurity, rmd + vtiDividendIncome + inflatedPensionIncome, adjustedStandardDeduction);
 
-                    // Federal tax on ordinary income (RMD + taxable SS)
-                    const federalTaxOrdinary = calculateTax(ordinaryIncome, federalBrackets2026.map(b => ({
+                    // Total ordinary income for federal tax (includes pension income)
+                    const ordinaryIncome = Math.max(0, rmd + inflatedPensionIncome + taxableSS - adjustedStandardDeduction);
+
+                    // Federal tax on ordinary income (RMD + taxable SS) - uses active brackets (MFJ or Single based on widowhood)
+                    const federalTaxOrdinary = calculateTax(ordinaryIncome, activeFederalBrackets.map(b => ({
                         rate: b.rate,
                         min: b.min * inflationMultiplier,
                         max: b.max * inflationMultiplier
@@ -1145,6 +1241,7 @@
             const manualConversionAmount = parseFloat(document.getElementById('annualConversion').value) || 0;
             const socialSecurityBenefit = parseFloat(document.getElementById('socialSecurityBenefit').value) || 0;
             const enableSocialSecurity = document.getElementById('enableSocialSecurity').checked;
+            const pensionIncome = parseFloat(document.getElementById('pensionIncome').value) || 0;
             const enableDefinedBenefit = document.getElementById('enableDefinedBenefit').checked;
             const annualDBContribution = enableDefinedBenefit ? (parseFloat(document.getElementById('annualDBContribution').value) || 0) : 0;
             const rolloverDBToIRA = document.getElementById('rolloverDBToIRA').checked;
@@ -1442,7 +1539,7 @@
                 </table>
                 </div>
                             <p style="color: #666; font-size: 13px; margin-top: 15px; font-style: italic;">
-                                💡 Tip: The calculator ${conversionStrategy === 'manual' ? 'uses your specified conversion amount. Consider using an auto-optimization strategy (e.g., "Fill up to 12% bracket") to maximize tax efficiency' : 'automatically optimizes conversions to fill up the ' + (targetBracketRate * 100).toFixed(0) + '% tax bracket each year'}${hasDividendIncome ? '. VTI dividends are factored into total tax calculations' : ''}.${!hasStateIncomeTax ? ' Moving to a no-income-tax state can significantly reduce your tax burden!' : ''}
+                                Tip: The calculator ${conversionStrategy === 'manual' ? 'uses your specified conversion amount. Consider using an auto-optimization strategy (e.g., "Fill up to 12% bracket") to maximize tax efficiency' : 'automatically optimizes conversions to fill up the ' + (targetBracketRate * 100).toFixed(0) + '% tax bracket each year'}${hasDividendIncome ? '. VTI dividends are factored into total tax calculations' : ''}.${!hasStateIncomeTax ? ' Moving to a no-income-tax state can significantly reduce your tax burden!' : ''}
                             </p>
                         </div>
                     </div>
@@ -1875,7 +1972,7 @@
                 </table>
                 </div>
                             <p style="color: #666; font-size: 13px; margin-top: 15px; font-style: italic;">
-                                💡 Note: Roth contributions do not reduce taxable income, so Scenario A pays more tax during working years compared to Scenario B (All Traditional).
+                                Note: Roth contributions do not reduce taxable income, so Scenario A pays more tax during working years compared to Scenario B (All Traditional).
                             </p>
                         </div>
                     </div>
@@ -1968,7 +2065,7 @@
                 </table>
                 </div>
                             <p style="color: #666; font-size: 13px; margin-top: 15px; font-style: italic;">
-                                💡 Note: Traditional contributions reduce taxable income, so Scenario B pays less tax during working years compared to Scenario A (Max Roth).
+                                Note: Traditional contributions reduce taxable income, so Scenario B pays less tax during working years compared to Scenario A (Max Roth).
                             </p>
                         </div>
                     </div>
@@ -2047,6 +2144,7 @@
             let scenarioA_cumulativeTaxes = scenarioA_totalWorkingTax + totalTaxesPaid; // Include working years + conversion taxes
             let scenarioA_rmdMarginalSum = 0;
             let scenarioA_rmdYears = 0;
+            let scenarioA_segregatedAccount = 0; // Gap #3: Track reinvested after-tax RMDs
 
             // Calculate RMDs for Scenario B (from age 75 to 90) and track breakeven
             let scenarioB_tradBalance = scenarioB_trad401kAfterConversions;
@@ -2057,11 +2155,19 @@
             let scenarioB_cumulativeTaxes = scenarioB_totalWorkingTax + scenarioB_totalTaxesPaid; // Include working years + conversion taxes
             let scenarioB_rmdMarginalSum = 0;
             let scenarioB_rmdYears = 0;
+            let scenarioB_segregatedAccount = 0; // Gap #3: Track reinvested after-tax RMDs
 
             let breakevenAge = null;
             let breakevenFound = false;
 
+            // Gap #4: Track year-by-year wealth for detailed breakeven analysis
+            let wealthByAge = [];
+
             for (let age = rmdAge; age <= 90; age++) {
+                // Widowhood: use Single brackets if age >= 75 and widowhood is modeled
+                const useWidowBrackets = modelWidowhood && age >= 75;
+                const activeFederalBrackets = useWidowBrackets ? federalBrackets2026Single : federalBrackets2026MFJ;
+
                 // Process Scenario A RMD
                 if (rmdDivisors[age] && scenarioA_tradBalance > 0) {
                     const yearNumber = retirementYear + (age - retirementAge);
@@ -2072,11 +2178,12 @@
                     const rmd = scenarioA_tradBalance / rmdDivisors[age];
                     scenarioA_totalRMDs += rmd;
 
-                    // Calculate taxes on RMD
+                    // Calculate taxes on RMD (includes pension income)
                     const adjustedStandardDeduction = standardDeduction2026 * inflationMultiplier;
-                    const ordinaryIncome = Math.max(0, rmd - adjustedStandardDeduction);
+                    const inflatedPensionIncome = pensionIncome * inflationMultiplier;
+                    const ordinaryIncome = Math.max(0, rmd + inflatedPensionIncome - adjustedStandardDeduction);
 
-                    const federalTax = calculateTax(ordinaryIncome, federalBrackets2026.map(b => ({
+                    const federalTax = calculateTax(ordinaryIncome, activeFederalBrackets.map(b => ({
                         rate: b.rate,
                         min: b.min * inflationMultiplier,
                         max: b.max * inflationMultiplier
@@ -2097,13 +2204,26 @@
                     scenarioA_cumulativeTaxes += totalTax;
 
                     // Track marginal rate
-                    const marginalRate = getMarginalRate(ordinaryIncome, federalBrackets2026.map(b => ({
+                    const marginalRate = getMarginalRate(ordinaryIncome, activeFederalBrackets.map(b => ({
                         rate: b.rate,
                         min: b.min * inflationMultiplier,
                         max: b.max * inflationMultiplier
                     })));
                     scenarioA_rmdMarginalSum += marginalRate * 100;
                     scenarioA_rmdYears++;
+
+                    // Gap #3: Reinvest after-tax RMD into segregated account (McQuarrie's exact counterfactual)
+                    const afterTaxRMD = rmd - totalTax;
+                    if (scenarioA_segregatedAccount > 0) {
+                        // Grow existing segregated account and apply tax drag
+                        const vtiDividendYield = 0.0154; // VTI dividend yield
+                        const qualifiedDividendRate = 0.15; // 15% federal rate on qualified dividends
+                        const stateMarginalRMD = hasStateIncomeTax ? marginalRate : 0;
+                        const segregatedDividendIncome = scenarioA_segregatedAccount * vtiDividendYield;
+                        const segregatedDividendTax = segregatedDividendIncome * (qualifiedDividendRate + stateMarginalRMD);
+                        scenarioA_segregatedAccount = (scenarioA_segregatedAccount - segregatedDividendTax) * (1 + cagr);
+                    }
+                    scenarioA_segregatedAccount += afterTaxRMD;
 
                     // Update balances
                     scenarioA_tradBalance -= rmd;
@@ -2125,11 +2245,12 @@
                     const rmd = scenarioB_tradBalance / rmdDivisors[age];
                     scenarioB_totalRMDs += rmd;
 
-                    // Calculate taxes on RMD
+                    // Calculate taxes on RMD (includes pension income)
                     const adjustedStandardDeduction = standardDeduction2026 * inflationMultiplier;
-                    const ordinaryIncome = Math.max(0, rmd - adjustedStandardDeduction);
+                    const inflatedPensionIncome = pensionIncome * inflationMultiplier;
+                    const ordinaryIncome = Math.max(0, rmd + inflatedPensionIncome - adjustedStandardDeduction);
 
-                    const federalTax = calculateTax(ordinaryIncome, federalBrackets2026.map(b => ({
+                    const federalTax = calculateTax(ordinaryIncome, activeFederalBrackets.map(b => ({
                         rate: b.rate,
                         min: b.min * inflationMultiplier,
                         max: b.max * inflationMultiplier
@@ -2149,14 +2270,27 @@
                     scenarioB_totalRMDStateTax += stateTax;
                     scenarioB_cumulativeTaxes += totalTax;
 
-                    // Track marginal rate
-                    const marginalRate = getMarginalRate(ordinaryIncome, federalBrackets2026.map(b => ({
+                    // Track marginal rate - uses active brackets (MFJ or Single based on widowhood)
+                    const marginalRate = getMarginalRate(ordinaryIncome, activeFederalBrackets.map(b => ({
                         rate: b.rate,
                         min: b.min * inflationMultiplier,
                         max: b.max * inflationMultiplier
                     })));
                     scenarioB_rmdMarginalSum += marginalRate * 100;
                     scenarioB_rmdYears++;
+
+                    // Gap #3: Reinvest after-tax RMD into segregated account (McQuarrie's exact counterfactual)
+                    const afterTaxRMD = rmd - totalTax;
+                    if (scenarioB_segregatedAccount > 0) {
+                        // Grow existing segregated account and apply tax drag
+                        const vtiDividendYield = 0.0154; // VTI dividend yield
+                        const qualifiedDividendRate = 0.15; // 15% federal rate on qualified dividends
+                        const stateMarginalRMD = hasStateIncomeTax ? marginalRate : 0;
+                        const segregatedDividendIncome = scenarioB_segregatedAccount * vtiDividendYield;
+                        const segregatedDividendTax = segregatedDividendIncome * (qualifiedDividendRate + stateMarginalRMD);
+                        scenarioB_segregatedAccount = (scenarioB_segregatedAccount - segregatedDividendTax) * (1 + cagr);
+                    }
+                    scenarioB_segregatedAccount += afterTaxRMD;
 
                     // Update balances
                     scenarioB_tradBalance -= rmd;
@@ -2170,12 +2304,23 @@
 
                 // Check for breakeven: Net wealth = (balances) - (cumulative taxes)
                 // Breakeven occurs when Scenario A net wealth exceeds Scenario B net wealth
-                if (!breakevenFound) {
-                    const scenarioA_netEarnings_atAge = (scenarioA_tradBalance + scenarioA_rothBalance) - scenarioA_cumulativeTaxes;
-                    const scenarioB_netEarnings_atAge = (scenarioB_tradBalance + scenarioB_rothBalance) - scenarioB_cumulativeTaxes;
+                // Gap #4: Calculate net wealth including segregated accounts
+                const scenarioA_netWealth_atAge = (scenarioA_tradBalance + scenarioA_rothBalance + scenarioA_segregatedAccount) - scenarioA_cumulativeTaxes;
+                const scenarioB_netWealth_atAge = (scenarioB_tradBalance + scenarioB_rothBalance + scenarioB_segregatedAccount) - scenarioB_cumulativeTaxes;
+                const wealthDifferential = scenarioA_netWealth_atAge - scenarioB_netWealth_atAge;
 
+                // Gap #4: Track wealth at this age
+                wealthByAge.push({
+                    age: age,
+                    scenarioA_netWealth: scenarioA_netWealth_atAge,
+                    scenarioB_netWealth: scenarioB_netWealth_atAge,
+                    differential: wealthDifferential,
+                    rothWinning: wealthDifferential > 0
+                });
+
+                if (!breakevenFound) {
                     // Check if Roth (Scenario A) overtakes Traditional (Scenario B)
-                    if (scenarioA_netEarnings_atAge > scenarioB_netEarnings_atAge) {
+                    if (wealthDifferential > 0) {
                         breakevenAge = age;
                         breakevenFound = true;
                     }
@@ -2190,9 +2335,9 @@
             const scenarioA_totalLifetimeTax = scenarioA_totalWorkingTax + totalTaxesPaid + scenarioA_totalRMDTaxes;
             const scenarioB_totalLifetimeTax = scenarioB_totalWorkingTax + scenarioB_totalTaxesPaid + scenarioB_totalRMDTaxes;
 
-            // Calculate net wealth at age 90
-            const scenarioA_netWealthAtAge90 = scenarioA_tradBalance + scenarioA_rothBalance - scenarioA_totalLifetimeTax;
-            const scenarioB_netWealthAtAge90 = scenarioB_tradBalance + scenarioB_rothBalance - scenarioB_totalLifetimeTax;
+            // Calculate net wealth at age 90 (Gap #3: includes segregated reinvestment account)
+            const scenarioA_netWealthAtAge90 = scenarioA_tradBalance + scenarioA_rothBalance + scenarioA_segregatedAccount - scenarioA_totalLifetimeTax;
+            const scenarioB_netWealthAtAge90 = scenarioB_tradBalance + scenarioB_rothBalance + scenarioB_segregatedAccount - scenarioB_totalLifetimeTax;
 
             const dollarLabel = showRealDollars ? ' (in today\'s dollars)' : '';
             const winner = scenarioA_netWealthAtAge90 > scenarioB_netWealthAtAge90 ?
@@ -2447,13 +2592,13 @@
                             ${breakevenAge !== null ? `
                             <tr style="background-color: #fff9c4;">
                                 <td colspan="4" style="padding: 12px; border: 1px solid #ddd; font-weight: bold; text-align: center; color: #f57c00;">
-                                    ⚖️ Breakeven Age: ${breakevenAge} years old (${breakevenAge - currentAge} years from now) - Max Roth scenario overtakes All Traditional in net wealth at this age
+                                    Breakeven Age: ${breakevenAge} years old (${breakevenAge - currentAge} years from now) - Max Roth scenario overtakes All Traditional in net wealth at this age
                                 </td>
                             </tr>
                             ` : `
                             <tr style="background-color: #ffebee;">
                                 <td colspan="4" style="padding: 12px; border: 1px solid #ddd; font-weight: bold; text-align: center; color: #c62828;">
-                                    ⚠️ No Breakeven: ${(scenarioA_tradBalance + scenarioA_rothBalance - scenarioA_totalLifetimeTax) > (scenarioB_tradBalance + scenarioB_rothBalance - scenarioB_totalLifetimeTax) ? 'Max Roth is always better (wins from the start)' : 'All Traditional is always better (Roth never catches up by age 90)'}
+                                    No Breakeven: ${(scenarioA_tradBalance + scenarioA_rothBalance - scenarioA_totalLifetimeTax) > (scenarioB_tradBalance + scenarioB_rothBalance - scenarioB_totalLifetimeTax) ? 'Max Roth is always better (wins from the start)' : 'All Traditional is always better (Roth never catches up by age 90)'}
                                 </td>
                             </tr>
                             `}
@@ -2461,7 +2606,7 @@
                     </table>
                 </div>
                 <p style="color: #666; font-size: 13px; margin-bottom: 20px; font-style: italic;">
-                    💡 The detailed calculations below show <strong>Scenario A (Max Roth)</strong>. Scenario B would require running separate calculations.
+                    The detailed calculations below show <strong>Scenario A (Max Roth)</strong>. Scenario B would require running separate calculations.
                 </p>
             `;
 
@@ -2573,6 +2718,10 @@
             // Compare current marginal rate vs projected retirement marginal rate
             const currentMarginal = scenarioA_marginalRate;
             const marginalDiff = currentMarginal - retirementMarginal;
+
+            // Supersaver Alert: Check if RMD marginal rate exceeds contribution marginal rate
+            const isSupersaver = traditionalAtAge75 > 0 && rmdMarginal > currentMarginal;
+            const supersaverBracketJump = isSupersaver ? (rmdMarginal - currentMarginal).toFixed(1) : 0;
 
             // Calculate balance ratio (what % is traditional vs total)
             const totalProjectedBalance = currentTradProjected + currentRothProjected;
@@ -2748,7 +2897,7 @@
 
             scenarioHTML += `
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    <h3 style="color: white; margin-top: 0; margin-bottom: 15px; font-size: 20px;">💡 Recommendation Based on Inputs Provided</h3>
+                    <h3 style="color: white; margin-top: 0; margin-bottom: 15px; font-size: 20px;">Recommendation Based on Inputs Provided</h3>
                     <div style="background: rgba(255,255,255,0.95); padding: 20px; border-radius: 6px;">
                         <div style="margin-bottom: 15px;">
                             <div style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 8px;">${recommendation}</div>
@@ -2757,11 +2906,11 @@
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
                             <div style="background: #e8f5e9; padding: 15px; border-radius: 6px; border-left: 4px solid #4caf50;">
-                                <div style="font-size: 12px; color: #2e7d32; font-weight: bold; margin-bottom: 5px;">SUGGESTED ROTH</div>
+                                <div style="font-size: 13px; color: #2e7d32; font-weight: bold; margin-bottom: 5px;">SUGGESTED ROTH</div>
                                 <div style="font-size: 24px; font-weight: bold; color: #1b5e20;">$${recommendedRoth.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
                             </div>
                             <div style="background: #e3f2fd; padding: 15px; border-radius: 6px; border-left: 4px solid #2196f3;">
-                                <div style="font-size: 12px; color: #1565c0; font-weight: bold; margin-bottom: 5px;">SUGGESTED TRADITIONAL</div>
+                                <div style="font-size: 13px; color: #1565c0; font-weight: bold; margin-bottom: 5px;">SUGGESTED TRADITIONAL</div>
                                 <div style="font-size: 24px; font-weight: bold; color: #0d47a1;">$${recommendedTrad.toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
                             </div>
                         </div>
@@ -2783,7 +2932,7 @@
                         <div style="margin-top: 15px; padding: 12px; background: #e8eaf6; border-radius: 4px; border-left: 3px solid #3f51b5;">
                             <div style="font-size: 13px; color: #283593;">
                                 <strong>📊 What Bracket Will Your RMDs Put You In? (McQuarrie Table 2 Analysis)</strong><br>
-                                <div style="margin-top: 8px; font-size: 12px;">
+                                <div style="margin-top: 8px; font-size: 13px;">
                                     At age ${rmdAge}, with ${formatValue(traditionalAtAge75, inflationDivisor, showRealDollars)} in Traditional accounts:<br><br>
                                     • First year RMD: ${formatValue(firstRMD, inflationDivisor, showRealDollars)} (using 24.6 divisor)<br>
                                     ${enableSocialSecurity ? `• Taxable Social Security: ${formatValue(taxableSS, inflationDivisor, showRealDollars)} (85% of benefit)<br>` : ''}
@@ -2801,6 +2950,27 @@
                         </div>
                         ` : ''}
 
+                        ${isSupersaver ? `
+                        <div style="margin-top: 15px; padding: 15px; background: #fff3e0; border-radius: 6px; border-left: 4px solid #ff6f00; box-shadow: 0 2px 4px rgba(255,111,0,0.2);">
+                            <div style="font-size: 14px; color: #e65100;">
+                                <strong style="font-size: 16px;">SUPERSAVER ALERT</strong><br>
+                                <div style="margin-top: 10px; line-height: 1.6;">
+                                    Your projected Traditional balance of <strong>${formatValue(traditionalAtAge75, inflationDivisor, showRealDollars)}</strong> will generate RMDs large enough to push you into the <strong style="color: #d84315;">${rmdMarginal.toFixed(0)}% bracket at age 75</strong> — <strong>HIGHER</strong> than the <strong>${currentMarginal.toFixed(0)}% bracket you're in during your working years</strong>!<br><br>
+
+                                    <div style="background: white; padding: 12px; border-radius: 4px; margin: 10px 0;">
+                                        📊 <strong>Bracket Reversal:</strong> Deductions during working years at ${currentMarginal.toFixed(0)}% → Taxed at withdrawal at ${rmdMarginal.toFixed(0)}% (+${supersaverBracketJump}%)<br>
+                                        💰 <strong>First year RMD (age 75):</strong> ${formatValue(firstRMD, inflationDivisor, showRealDollars)}<br>
+                                        📈 <strong>Your Traditional balance:</strong> ${formatValue(traditionalAtAge75, inflationDivisor, showRealDollars)}
+                                    </div>
+
+                                    <strong style="color: #d84315;">RECOMMENDATION:</strong> Consider <strong>maximizing Roth contributions during your working years</strong> to avoid this bracket reversal. Your future retirement RMDs will be taxed at a HIGHER rate than the deductions you're getting today!<br><br>
+
+                                    <em style="font-size: 13px; color: #666;">This is the "supersaver problem" - when very high accumulation pushes RMDs into brackets higher than contribution years. More common for high earners with long accumulation periods or inherited IRAs.</em>
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+
                         ${currentTradProjected > 0 ? `
                         <div style="margin-top: 15px; padding: 12px; background: #ffebee; border-radius: 4px; border-left: 3px solid #f44336;">
                             <div style="font-size: 13px; color: #c62828;">
@@ -2808,17 +2978,17 @@
                                 <div style="margin-top: 8px;">
                                     Your projected Traditional balance at retirement: ${formatValue(currentTradProjected, inflationDivisor, showRealDollars)}<br>
                                     <div style="margin-top: 5px; background: white; border-radius: 4px; overflow: hidden; height: 30px; position: relative; box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);">
-                                        <div style="position: absolute; left: 0; top: 0; height: 100%; background: linear-gradient(90deg, #ff5252 0%, #ff1744 100%); width: ${govOwnsPercent.toFixed(1)}%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px;">
+                                        <div style="position: absolute; left: 0; top: 0; height: 100%; background: linear-gradient(90deg, #ff5252 0%, #ff1744 100%); width: ${govOwnsPercent.toFixed(1)}%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 13px;">
                                             ${govOwnsPercent > 15 ? `Gov: ${govOwnsPercent.toFixed(0)}%` : ''}
                                         </div>
-                                        <div style="position: absolute; right: 0; top: 0; height: 100%; background: linear-gradient(90deg, #66bb6a 0%, #43a047 100%); width: ${(100 - govOwnsPercent).toFixed(1)}%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px;">
+                                        <div style="position: absolute; right: 0; top: 0; height: 100%; background: linear-gradient(90deg, #66bb6a 0%, #43a047 100%); width: ${(100 - govOwnsPercent).toFixed(1)}%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 13px;">
                                             ${(100 - govOwnsPercent) > 15 ? `Yours: ${(100 - govOwnsPercent).toFixed(0)}%` : ''}
                                         </div>
                                     </div>
-                                    <div style="margin-top: 8px; font-size: 12px;">
+                                    <div style="margin-top: 8px; font-size: 13px;">
                                         • <strong style="color: #f44336;">Government's share (tax debt):</strong> ${formatValue(taxDebtOnCurrentTrad, inflationDivisor, showRealDollars)} (${govOwnsPercent.toFixed(0)}%)<br>
                                         • <strong style="color: #43a047;">Your after-tax value:</strong> ${formatValue(afterTaxTradValue, inflationDivisor, showRealDollars)} (${(100 - govOwnsPercent).toFixed(0)}%)<br>
-                                        <em style="font-size: 11px; color: #666;">This estimate uses your ${retirementMarginal.toFixed(0)}% projected retirement marginal rate. Actual taxes depend on withdrawal timing and strategy.</em>
+                                        <em style="font-size: 13px; color: #666;">This estimate uses your ${retirementMarginal.toFixed(0)}% projected retirement marginal rate. Actual taxes depend on withdrawal timing and strategy.</em>
                                     </div>
                                 </div>
                             </div>
@@ -2827,7 +2997,7 @@
 
                         ${additionalFactors.length > 0 ? `
                         <div style="margin-top: 15px; padding: 12px; background: #e3f2fd; border-radius: 4px; border-left: 3px solid #2196f3;">
-                            <div style="font-size: 12px; color: #0d47a1;">
+                            <div style="font-size: 13px; color: #0d47a1;">
                                 <strong>📊 Additional Factors:</strong><br>
                                 ${additionalFactors.map(f => `• ${f}`).join('<br>')}
                             </div>
@@ -2835,15 +3005,15 @@
                         ` : ''}
 
                         <div style="margin-top: 15px; padding: 12px; background: #f3e5f5; border-radius: 4px; border-left: 3px solid #9c27b0;">
-                            <div style="font-size: 12px; color: #4a148c;">
+                            <div style="font-size: 13px; color: #4a148c;">
                                 <strong>🎯 Recommended Roth Conversion Strategy (in retirement):</strong> <span style="font-weight: bold; color: #6a1b9a;">${recommendedConversionStrategy === 'auto-12' ? 'Fill up to 12% bracket' : recommendedConversionStrategy === 'auto-22' ? 'Fill up to 22% bracket' : recommendedConversionStrategy === 'auto-24' ? 'Fill up to 24% bracket' : 'Fill up to 32% bracket'}</span><br>
-                                ${conversionStrategyReasoning}${recommendedConversionStrategy !== conversionStrategy ? `<br><strong>💡 Tip:</strong> Try changing the "Roth Conversion Strategy" dropdown above to "${recommendedConversionStrategy === 'auto-12' ? 'Auto: Fill up to 12% bracket' : recommendedConversionStrategy === 'auto-22' ? 'Auto: Fill up to 22% bracket' : recommendedConversionStrategy === 'auto-24' ? 'Auto: Fill up to 24% bracket' : 'Auto: Fill up to 32% bracket'}" to see the impact on your net wealth.` : ''}
+                                ${conversionStrategyReasoning}${recommendedConversionStrategy !== conversionStrategy ? `<br><strong>Tip:</strong> Try changing the "Roth Conversion Strategy" dropdown above to "${recommendedConversionStrategy === 'auto-12' ? 'Auto: Fill up to 12% bracket' : recommendedConversionStrategy === 'auto-22' ? 'Auto: Fill up to 22% bracket' : recommendedConversionStrategy === 'auto-24' ? 'Auto: Fill up to 24% bracket' : 'Auto: Fill up to 32% bracket'}" to see the impact on your net wealth.` : ''}
                             </div>
                         </div>
 
                         <div style="margin-top: 15px; padding: 12px; background: #fff3cd; border-radius: 4px; border-left: 3px solid #ffc107;">
-                            <div style="font-size: 12px; color: #856404;">
-                                <strong>⚠️ Note:</strong> This recommendation considers your existing balances, marginal rates, savings rate, and state tax arbitrage. Every situation is unique—consider consulting a tax professional for personalized advice.
+                            <div style="font-size: 13px; color: #856404;">
+                                <strong>Note:</strong> This recommendation considers your existing balances, marginal rates, savings rate, and state tax arbitrage. Every situation is unique—consider consulting a tax professional for personalized advice.
                             </div>
                         </div>
                     </div>
@@ -2873,10 +3043,17 @@
                 let roth401kBalance = roth401kAfterConversions;
                 let taxableAccountBalance = taxableAccountAtRetirement;
 
+                // Gap #3: Segregated account for reinvested after-tax RMDs (McQuarrie's "exact counterfactual")
+                let segregatedReinvestmentAccount = 0;
+
                 for (let age = rmdAge; age <= 90; age++) {
                     const yearNumber = retirementYear + (age - retirementAge);
                     const yearsFromNow = yearNumber - currentYear;
                     const inflationMultiplier = Math.pow(1 + inflation, yearsFromNow);
+
+                    // Widowhood: use Single brackets if age >= 75 and widowhood is modeled
+                    const useWidowBrackets = modelWidowhood && age >= 75;
+                    const activeFederalBrackets = useWidowBrackets ? federalBrackets2026Single : federalBrackets2026MFJ;
 
                     // Grow taxable account
                     taxableAccountBalance *= (1 + cagr);
@@ -2891,18 +3068,21 @@
                     const socialSecurity = (enableSocialSecurity && age >= ssStartAge) ?
                         socialSecurityBenefit * Math.pow(1 + inflation, yearsFromNow) : 0;
 
-                    // Calculate provisional income for SS taxation (excludes standard deduction)
-                    const provisionalIncome = rmdAmount + vtiDividendIncome;
+                    // Pension income (inflation adjusted)
+                    const inflatedPensionIncome = pensionIncome * inflationMultiplier;
+
+                    // Calculate provisional income for SS taxation (excludes standard deduction, includes pension)
+                    const provisionalIncome = rmdAmount + vtiDividendIncome + inflatedPensionIncome;
 
                     // Calculate taxable portion of Social Security (Tax Torpedo)
                     const taxableSS = calculateTaxableSS(socialSecurity, provisionalIncome);
 
-                    // Calculate taxes on RMD including dividend income and taxable SS
+                    // Calculate taxes on RMD including dividend income, pension, and taxable SS
                     const adjustedStandardDeduction = standardDeduction2026 * inflationMultiplier;
-                    const ordinaryIncome = Math.max(0, rmdAmount + taxableSS - adjustedStandardDeduction);
+                    const ordinaryIncome = Math.max(0, rmdAmount + inflatedPensionIncome + taxableSS - adjustedStandardDeduction);
 
-                    // Federal tax on RMD (ordinary income)
-                    const federalTaxOrdinary = calculateTax(ordinaryIncome, federalBrackets2026.map(b => ({
+                    // Federal tax on RMD (ordinary income) - uses active brackets (MFJ or Single based on widowhood)
+                    const federalTaxOrdinary = calculateTax(ordinaryIncome, activeFederalBrackets.map(b => ({
                         rate: b.rate,
                         min: b.min * inflationMultiplier,
                         max: b.max * inflationMultiplier
@@ -2945,6 +3125,22 @@
                     const totalTaxRMD = federalTaxRMD + stateTaxRMD + irmaaCharge;
                     const afterTaxRMD = rmdAmount + socialSecurity - totalTaxRMD;
 
+                    // Gap #3: Reinvest after-tax RMD into segregated account (McQuarrie's exact counterfactual)
+                    // First, grow the existing reinvestment account balance and apply tax drag
+                    if (segregatedReinvestmentAccount > 0) {
+                        // Calculate dividend income on segregated account
+                        const segregatedDividendIncome = segregatedReinvestmentAccount * vtiDividendYield;
+
+                        // Calculate tax on dividends (qualified dividend rate + state tax if applicable)
+                        const segregatedDividendTax = segregatedDividendIncome * (qualifiedDividendRate + (hasStateIncomeTax ? stateMarginalRMD : 0));
+
+                        // Apply tax drag and grow the account
+                        segregatedReinvestmentAccount = (segregatedReinvestmentAccount - segregatedDividendTax) * (1 + cagr);
+                    }
+
+                    // Add this year's after-tax RMD to segregated account
+                    segregatedReinvestmentAccount += afterTaxRMD;
+
                     // Roth withdrawal (tax-free, no RMD requirement but assumed same withdrawal for comparison)
                     const rothWithdrawal = rmdDivisors[age] ? roth401kBalance / rmdDivisors[age] : 0;
                     const totalRothIncome = rothWithdrawal + socialSecurity; // Roth + SS (no tax on conversions)
@@ -2970,6 +3166,7 @@
                         irmaaCharge: irmaaCharge,
                         totalTaxRMD: totalTaxRMD,
                         afterTaxRMD: afterTaxRMD,
+                        segregatedReinvestmentAccount: segregatedReinvestmentAccount, // Gap #3: Track reinvested RMDs
                         roth401kBalance: roth401kBalance,
                         rothWithdrawal: rothWithdrawal,
                         totalRothIncome: totalRothIncome,
@@ -2986,6 +3183,9 @@
                     if (trad401kBalance <= 0 && roth401kBalance <= 0) break;
                 }
 
+                // Gap #3: Store final segregated reinvestment account balance for display
+                const finalSegregatedAccount = segregatedReinvestmentAccount;
+
                 const hasDividendIncomeRMD = taxableAccountSize > 0;
                 const hasSocialSecurity = enableSocialSecurity && socialSecurityBenefit > 0;
                 const stateLabelRMD = hasStateIncomeTax ? retirementState : 'No State Tax';
@@ -3001,6 +3201,12 @@
                             <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
                                 Traditional 401k requires RMDs starting at age 75. Roth 401k shown with equivalent withdrawals for comparison (no RMDs required).${dividendTaxNoteRMD}${ssTaxNote}
                             </p>
+                            <div style="padding: 12px; background-color: #fff3e0; border-left: 4px solid #ff9800; margin-bottom: 15px; border-radius: 4px;">
+                                <strong style="color: #e65100;">CAUTION: Marginal vs Effective Rates</strong>
+                                <p style="margin: 8px 0 0 0; font-size: 13px; color: #666; line-height: 1.5;">
+                                    DO NOT use <strong>effective rates</strong> (Eff % column) to decide Roth vs Traditional. ALWAYS compare <strong>marginal rates</strong> (Fed % column). Your contribution decision depends on the tax rate on your <em>next dollar</em> of income (marginal), not your average rate across all income (effective). The effective rate is shown for informational purposes only.
+                                </p>
+                            </div>
                             <div style="overflow-x: auto;">
                         <table style="border-collapse: collapse; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; white-space: nowrap;">
                             <thead>
@@ -3016,6 +3222,7 @@
                                     <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Fed %</th>
                                     <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Eff %</th>
                                     <th style="padding: 10px; text-align: right; border: 1px solid #ddd;">After-Tax Income</th>
+                                    <th style="padding: 10px; text-align: right; border: 1px solid #ddd;" title="Cumulative after-tax RMDs reinvested with tax drag">Reinvested RMDs</th>
                                     <th style="padding: 10px; text-align: right; border: 1px solid #ddd;">Roth Income</th>
                                 </tr>
                             </thead>
@@ -3038,6 +3245,7 @@
                             <td style="padding: 10px; text-align: center; border: 1px solid #ddd; background-color: #e3f2fd;">${detail.federalMarginalRMD}%</td>
                             <td style="padding: 10px; text-align: center; border: 1px solid #ddd; font-weight: bold; background-color: #f1f8e9;">${detail.effectiveRateRMD}%</td>
                             <td style="padding: 10px; text-align: right; border: 1px solid #ddd; font-weight: bold; background-color: #fff3e0;">$${(detail.afterTaxRMD/1000).toFixed(0)}k</td>
+                            <td style="padding: 10px; text-align: right; border: 1px solid #ddd; font-weight: bold; background-color: #ffe0b2;" title="Cumulative balance with tax drag">$${(detail.segregatedReinvestmentAccount/1000).toFixed(0)}k</td>
                             <td style="padding: 10px; text-align: right; border: 1px solid #ddd; font-weight: bold; background-color: #e8f5e9;">$${(detail.totalRothIncome/1000).toFixed(0)}k</td>
                         </tr>
                     `;
@@ -3063,7 +3271,7 @@
                 if (hasDividendIncomeRMD) colspanValue += 1;
 
                 rmdHTML += `
-                        <tr style="background-color: #9C27B0; color: white; font-weight: bold; font-size: 11px;">
+                        <tr style="background-color: #9C27B0; color: white; font-weight: bold; font-size: 13px;">
                             <td colspan="2" style="padding: 8px; border: 1px solid #ddd; text-align: right;">TOTALS:</td>
                             <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">${formatValue(totalRMDs, inflationDivisor, showRealDollars)}</td>
                             ${hasSocialSecurity ? `<td style="padding: 8px; text-align: right; border: 1px solid #ddd;">${formatValue(totalSS, inflationDivisor, showRealDollars)}</td>` : ''}
@@ -3074,16 +3282,18 @@
                             <td style="padding: 8px; text-align: center; border: 1px solid #ddd;"></td>
                             <td style="padding: 8px; text-align: center; border: 1px solid #ddd;">${overallEffectiveRMD}%</td>
                             <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">${formatValue(totalAfterTaxRMDs, inflationDivisor, showRealDollars)}</td>
+                            <td style="padding: 8px; text-align: right; border: 1px solid #ddd;" title="Final balance at age 90">${formatValue(finalSegregatedAccount, inflationDivisor, showRealDollars)}</td>
                             <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">${formatValue(totalRothIncome, inflationDivisor, showRealDollars)}</td>
                         </tr>
                     </tbody>
                 </table>
                 </div>
                             <p style="color: #666; font-size: 13px; margin-top: 15px; font-style: italic;">
-                                💡 Note: Roth 401k has no RMD requirement. All Roth withdrawals are tax-free and don't trigger SS taxation or IRMAA.
+                                Note: Roth 401k has no RMD requirement. All Roth withdrawals are tax-free and don't trigger SS taxation or IRMAA.
                                 ${hasSocialSecurity ? '<strong>Tax Torpedo:</strong> RMDs can cause up to 85% of Social Security to become taxable. ' : ''}
                                 ${totalIRMAA > 0 ? '<strong>IRMAA:</strong> Higher income triggers Medicare surcharges (highlighted in red). ' : ''}
                                 ${!hasStateIncomeTax ? '<strong>No state tax</strong> - significant savings! ' : ''}
+                                <br><strong>Reinvested RMDs (Gap #3):</strong> After-tax RMDs are reinvested into a segregated taxable account subject to annual tax drag on dividends/gains (McQuarrie's "exact counterfactual"). This prevents false inflation of Roth advantage.
                             </p>
                         </div>
                     </div>
@@ -3166,7 +3376,7 @@
                 </table>
                 </div>
                             <p style="color: #666; font-size: 13px; margin-top: 15px; font-style: italic;">
-                                💡 Tip: The calculator ${conversionStrategy === 'manual' ? 'uses your specified conversion amount. Consider using an auto-optimization strategy (e.g., "Fill up to 12% bracket") to maximize tax efficiency' : 'automatically optimizes conversions to fill up the ' + (targetBracketRate * 100).toFixed(0) + '% tax bracket each year'}${hasDividendIncome ? '. VTI dividends are factored into total tax calculations' : ''}.${!hasStateIncomeTax ? ' Moving to a no-income-tax state can significantly reduce your tax burden!' : ''}
+                                Tip: The calculator ${conversionStrategy === 'manual' ? 'uses your specified conversion amount. Consider using an auto-optimization strategy (e.g., "Fill up to 12% bracket") to maximize tax efficiency' : 'automatically optimizes conversions to fill up the ' + (targetBracketRate * 100).toFixed(0) + '% tax bracket each year'}${hasDividendIncome ? '. VTI dividends are factored into total tax calculations' : ''}.${!hasStateIncomeTax ? ' Moving to a no-income-tax state can significantly reduce your tax burden!' : ''}
                             </p>
                         </div>
                     </div>
@@ -3189,28 +3399,578 @@
                 </div>
             ` : '';
 
-            // Add Roth Advantage to recommendation section if RMD data available
-            let rothAdvantageHTML = '';
-            if (yearsUntilRMD >= 0 && rmdDetails.length > 0) {
-                rothAdvantageHTML = `
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                    <div style="background: rgba(255,255,255,0.95); padding: 20px; border-radius: 6px;">
-                        <div style="padding: 15px; background: #e8f5e9; border-radius: 4px; border-left: 4px solid #4caf50;">
-                            <div style="font-size: 13px; color: #1b5e20;">
-                                <strong>📊 Roth Advantage During RMD Years (Age 75-90):</strong> <span style="font-size: 18px; font-weight: bold; color: #2e7d32;">${formatValue(rothAdvantage, inflationDivisor, showRealDollars)}</span><br><br>
-                                <strong>How this is calculated:</strong><br>
-                                • <strong>Total Roth Income:</strong> ${formatValue(totalRothIncome, inflationDivisor, showRealDollars)} (tax-free withdrawals + Social Security)<br>
-                                • <strong>Total After-Tax Traditional Income:</strong> ${formatValue(totalAfterTaxRMDs, inflationDivisor, showRealDollars)} (RMDs + SS - taxes)<br>
-                                • <strong>Difference:</strong> ${formatValue(rothAdvantage, inflationDivisor, showRealDollars)}<br><br>
-                                <em style="font-size: 12px;">This represents the cumulative income advantage from having more money in Roth accounts during retirement. It includes: (1) tax savings from tax-free Roth withdrawals, (2) no Social Security taxation triggered by Roth withdrawals, (3) no IRMAA surcharges from Roth income, and (4) the compounding benefit of earlier Roth conversions that grew tax-free.</em>
+            // Gap #6: Bracket Filling Visualization
+            // Helper function to calculate how income fills tax brackets
+            function calculateBracketAllocation(taxableIncome, standardDeduction, federalBrackets) {
+                const afterStandardDeduction = Math.max(0, taxableIncome - standardDeduction);
+                const allocations = [];
+                let remainingIncome = afterStandardDeduction;
+
+                // Standard deduction (0% bracket)
+                allocations.push({
+                    label: 'Standard Deduction',
+                    amount: Math.min(taxableIncome, standardDeduction),
+                    rate: 0,
+                    tax: 0
+                });
+
+                // Fill brackets in order
+                for (const bracket of federalBrackets) {
+                    if (remainingIncome <= 0) break;
+
+                    const bracketSize = bracket.max - bracket.min;
+                    const amountInBracket = Math.min(remainingIncome, bracketSize);
+                    const taxOnThisBracket = amountInBracket * bracket.rate;
+
+                    allocations.push({
+                        label: `${(bracket.rate * 100).toFixed(0)}% Bracket`,
+                        amount: amountInBracket,
+                        rate: bracket.rate,
+                        tax: taxOnThisBracket
+                    });
+
+                    remainingIncome -= amountInBracket;
+                }
+
+                return allocations;
+            }
+
+            // Calculate bracket filling for both scenarios
+            const standardDeductionMFJ = 29200; // 2026 standard deduction for MFJ
+
+            // Scenario A: Max Roth (higher taxable income during working years)
+            const scenarioA_taxableIncome = totalIncome - scenarioA_annualTrad - annualDBContribution;
+            const scenarioA_bracketAllocation = calculateBracketAllocation(scenarioA_taxableIncome, standardDeductionMFJ, federalBrackets2026MFJ);
+
+            // Scenario B: All Traditional (lower taxable income during working years)
+            const scenarioB_taxableIncome = totalIncome - scenarioB_annualTrad - annualDBContribution;
+            const scenarioB_bracketAllocation = calculateBracketAllocation(scenarioB_taxableIncome, standardDeductionMFJ, federalBrackets2026MFJ);
+
+            // Calculate total tax and effective rates
+            const scenarioA_totalTaxFromBrackets = scenarioA_bracketAllocation.reduce((sum, b) => sum + b.tax, 0);
+            const scenarioB_totalTaxFromBrackets = scenarioB_bracketAllocation.reduce((sum, b) => sum + b.tax, 0);
+            const scenarioA_effectiveRate = scenarioA_taxableIncome > 0 ? (scenarioA_totalTaxFromBrackets / scenarioA_taxableIncome) * 100 : 0;
+            const scenarioB_effectiveRate = scenarioB_taxableIncome > 0 ? (scenarioB_totalTaxFromBrackets / scenarioB_taxableIncome) * 100 : 0;
+
+            // Create bracket filling visualization
+            const bracketFillingHTML = `
+                <div style="background: linear-gradient(135deg, #4a90e2 0%, #50c878 100%); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h3 style="color: white; margin-top: 0; margin-bottom: 15px; font-size: 20px; cursor: pointer;" onclick="toggleBreakdownSection('bracket-filling')">
+                        <span id="bracket-filling-icon" style="display: inline-block; width: 15px;">▶</span> 📊 Understanding Tax Arbitrage: How Your Income Fills Tax Brackets
+                    </h3>
+                    <div id="bracket-filling-content" style="display: none; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 6px;">
+                        <div style="font-size: 14px; color: #333; line-height: 1.8;">
+                            <p style="margin-top: 0; font-size: 15px; font-weight: bold; color: #0d47a1;">Why Traditional contributions create tax arbitrage:</p>
+                            <p style="margin: 10px 0; font-size: 14px;">Traditional 401(k) contributions reduce your current taxable income, causing it to "fill up" lower tax brackets first. When you withdraw in retirement, you get to use the standard deduction and fill the 10% and 12% brackets before hitting higher rates. This creates a <strong>tax arbitrage opportunity</strong> even if your tax rate doesn't change.</p>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                                <!-- Scenario A: Max Roth -->
+                                <div style="padding: 15px; background: #fff3e0; border-radius: 4px; border-left: 4px solid #ff9800;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #e65100; font-size: 16px;">🔸 Scenario A: Max Roth</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Current Taxable Income:</strong> $${scenarioA_taxableIncome.toLocaleString('en-US')}</p>
+                                    <table style="width: 100%; font-size: 12px; margin: 10px 0; border-collapse: collapse;">
+                                        <thead>
+                                            <tr style="background: #fbe9e7;">
+                                                <th style="padding: 6px; text-align: left; border: 1px solid #ddd;">Bracket</th>
+                                                <th style="padding: 6px; text-align: right; border: 1px solid #ddd;">Amount</th>
+                                                <th style="padding: 6px; text-align: right; border: 1px solid #ddd;">Tax</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${scenarioA_bracketAllocation.map(b => `
+                                                <tr style="background: white;">
+                                                    <td style="padding: 6px; border: 1px solid #ddd;">${b.label}</td>
+                                                    <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${b.amount.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                                    <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${b.tax.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                                </tr>
+                                            `).join('')}
+                                            <tr style="background: #ffccbc; font-weight: bold;">
+                                                <td style="padding: 6px; border: 1px solid #ddd;">TOTAL</td>
+                                                <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${scenarioA_taxableIncome.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                                <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${scenarioA_totalTaxFromBrackets.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p style="margin: 10px 0; font-size: 13px; font-weight: bold; color: #d84315;">Effective Tax Rate: ${scenarioA_effectiveRate.toFixed(1)}%</p>
+                                    <p style="margin: 10px 0; font-size: 13px; font-weight: bold; color: #d84315;">Marginal Tax Rate: ${scenarioA_marginalRate.toFixed(1)}%</p>
+                                </div>
+
+                                <!-- Scenario B: All Traditional -->
+                                <div style="padding: 15px; background: #e8f5e9; border-radius: 4px; border-left: 4px solid #4caf50;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #1b5e20; font-size: 16px;">🔹 Scenario B: All Traditional</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Current Taxable Income:</strong> $${scenarioB_taxableIncome.toLocaleString('en-US')}</p>
+                                    <table style="width: 100%; font-size: 12px; margin: 10px 0; border-collapse: collapse;">
+                                        <thead>
+                                            <tr style="background: #c8e6c9;">
+                                                <th style="padding: 6px; text-align: left; border: 1px solid #ddd;">Bracket</th>
+                                                <th style="padding: 6px; text-align: right; border: 1px solid #ddd;">Amount</th>
+                                                <th style="padding: 6px; text-align: right; border: 1px solid #ddd;">Tax</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${scenarioB_bracketAllocation.map(b => `
+                                                <tr style="background: white;">
+                                                    <td style="padding: 6px; border: 1px solid #ddd;">${b.label}</td>
+                                                    <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${b.amount.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                                    <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${b.tax.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                                </tr>
+                                            `).join('')}
+                                            <tr style="background: #a5d6a7; font-weight: bold;">
+                                                <td style="padding: 6px; border: 1px solid #ddd;">TOTAL</td>
+                                                <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${scenarioB_taxableIncome.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                                <td style="padding: 6px; text-align: right; border: 1px solid #ddd;">$${scenarioB_totalTaxFromBrackets.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p style="margin: 10px 0; font-size: 13px; font-weight: bold; color: #2e7d32;">Effective Tax Rate: ${scenarioB_effectiveRate.toFixed(1)}%</p>
+                                    <p style="margin: 10px 0; font-size: 13px; font-weight: bold; color: #2e7d32;">Marginal Tax Rate: ${scenarioB_marginalRate.toFixed(1)}%</p>
+                                </div>
+                            </div>
+
+                            <div style="padding: 15px; background: #e3f2fd; border-radius: 4px; border-left: 4px solid #2196f3; margin: 15px 0;">
+                                <p style="margin-top: 0; font-weight: bold; color: #0d47a1; font-size: 15px;">💡 Key Insight: Tax Arbitrage Explained</p>
+                                <p style="margin: 10px 0; font-size: 13px;">Traditional contributions reduce your income TODAY, saving tax at your <strong>marginal rate</strong> (${scenarioB_marginalRate.toFixed(1)}%). But when you withdraw in retirement, you fill up the lower brackets first, paying at a much lower <strong>effective rate</strong> (often 10-15%).</p>
+
+                                <p style="margin: 10px 0; font-size: 13px; font-weight: bold;">Example with your numbers:</p>
+                                <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                    <li><strong>Save today:</strong> Traditional contribution saves $${((scenarioA_taxableIncome - scenarioB_taxableIncome) * (scenarioB_marginalRate / 100)).toLocaleString('en-US', {maximumFractionDigits: 0})} at ${scenarioB_marginalRate.toFixed(1)}% marginal rate</li>
+                                    <li><strong>Pay later:</strong> Withdraw $${(scenarioA_taxableIncome - scenarioB_taxableIncome).toLocaleString('en-US', {maximumFractionDigits: 0})} in retirement, filling lower brackets first</li>
+                                    <li><strong>Standard deduction:</strong> First $29,200 @ 0% = $0 tax</li>
+                                    <li><strong>10% bracket:</strong> Next $24,800 @ 10% = $2,480</li>
+                                    <li><strong>12% bracket:</strong> Next $76,000 @ 12% = $9,120</li>
+                                    <li><strong>Result:</strong> First $130,000 withdrawn taxed at only <strong>8.9% effective rate</strong></li>
+                                </ul>
+
+                                <p style="margin: 10px 0; font-size: 13px; font-weight: bold; color: #0d47a1;">This is why Traditional 401(k) contributions can beat Roth even if tax rates stay the same.</p>
+                            </div>
+
+                            <div style="padding: 15px; background: #fff8e1; border-radius: 4px; border-left: 4px solid #ffc107; margin: 15px 0;">
+                                <p style="margin-top: 0; font-weight: bold; color: #f57f17; font-size: 14px;">⚠️ When This Breaks Down:</p>
+                                <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                    <li><strong>Pension income:</strong> Pushes you into higher brackets, reducing arbitrage benefit</li>
+                                    <li><strong>Large Traditional balances:</strong> RMDs can exceed contribution brackets (see Supersaver Alert)</li>
+                                    <li><strong>Early retirement:</strong> More years of withdrawals means more total income taxed</li>
+                                    <li><strong>Tax rate increases:</strong> Future rate hikes reduce (but don't eliminate) the benefit</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+            `;
+
+            // Gap #4: Detailed Breakeven Analysis - Year-by-Year Wealth Tracking
+            let breakevenAnalysisHTML = '';
+            if (wealthByAge.length > 0) {
+                // Calculate ROI metrics at key ages
+                const initialConversionCost = totalTaxesPaid; // Tax paid during conversion period
+                const roiAtAge80 = wealthByAge.find(w => w.age === 80);
+                const roiAtAge85 = wealthByAge.find(w => w.age === 85);
+                const roiAtAge90 = wealthByAge.find(w => w.age === 90);
+
+                // Find when Roth first becomes positive (crosses zero line)
+                const firstPositiveAge = wealthByAge.find(w => w.differential > 0);
+
+                // Calculate cumulative advantage percentages
+                const finalWealth = roiAtAge90 ? roiAtAge90.scenarioA_netWealth : 0;
+                const finalAdvantage = roiAtAge90 ? roiAtAge90.differential : 0;
+                const advantagePercentage = finalWealth > 0 ? (finalAdvantage / finalWealth) * 100 : 0;
+
+                breakevenAnalysisHTML = `
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <h3 style="color: white; margin-top: 0; margin-bottom: 15px; font-size: 20px; cursor: pointer;" onclick="toggleBreakdownSection('breakeven-analysis')">
+                            <span id="breakeven-analysis-icon" style="display: inline-block; width: 15px;">▶</span> 📈 Detailed Breakeven Analysis: Pace of Payoff
+                        </h3>
+                        <div id="breakeven-analysis-content" style="display: none; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 6px;">
+                            <div style="font-size: 14px; color: #333; line-height: 1.8;">
+                                <p style="margin-top: 0; font-size: 15px; font-weight: bold; color: #0d47a1;">McQuarrie's Key Insight: "Inch by Inch Over Decades"</p>
+                                <p style="margin: 10px 0; font-size: 14px;">Roth conversions don't pay off quickly. They work through slow, steady accumulation over 20-30 years. This table shows the year-by-year progression of your wealth under both scenarios.</p>
+
+                                <div style="padding: 15px; background: #e3f2fd; border-radius: 4px; border-left: 4px solid #2196f3; margin: 15px 0;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #0d47a1; font-size: 15px;">💡 Key Findings for Your Situation:</p>
+                                    <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                        ${breakevenAge ? `
+                                            <li><strong>Breakeven Age:</strong> ${breakevenAge} years old - when Max Roth finally overtakes All Traditional</li>
+                                            <li><strong>Time to Breakeven:</strong> ${breakevenAge - rmdAge} years after RMDs start (${breakevenAge - currentAge} years from now)</li>
+                                        ` : `
+                                            <li><strong>No Breakeven by Age 90:</strong> All Traditional wins throughout retirement with these assumptions</li>
+                                        `}
+                                        ${roiAtAge90 ? `
+                                            <li><strong>Final Advantage at Age 90:</strong> ${formatValue(roiAtAge90.differential, inflationDivisor, showRealDollars)} (${advantagePercentage.toFixed(1)}% of final wealth)</li>
+                                        ` : ''}
+                                        ${firstPositiveAge ? `
+                                            <li><strong>First Positive Year:</strong> Age ${firstPositiveAge.age} - when Roth advantage first becomes positive</li>
+                                        ` : ''}
+                                    </ul>
+                                </div>
+
+                                <h4 style="margin-top: 20px; color: #333;">Year-by-Year Net Wealth Comparison (Age ${rmdAge}-90)</h4>
+                                <div style="overflow-x: auto; max-height: 400px; overflow-y: auto;">
+                                    <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0;">
+                                        <thead style="position: sticky; top: 0; background: #673AB7; color: white;">
+                                            <tr>
+                                                <th style="padding: 8px; text-align: center; border: 1px solid #ddd;">Age</th>
+                                                <th style="padding: 8px; text-align: right; border: 1px solid #ddd;">Scenario A:<br>Max Roth</th>
+                                                <th style="padding: 8px; text-align: right; border: 1px solid #ddd;">Scenario B:<br>All Traditional</th>
+                                                <th style="padding: 8px; text-align: right; border: 1px solid #ddd;">Roth Advantage/<br>Disadvantage</th>
+                                                <th style="padding: 8px; text-align: center; border: 1px solid #ddd;">Winner</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${wealthByAge.map(w => {
+                                                const bgColor = w.rothWinning ? '#e8f5e9' : '#ffebee';
+                                                const textColor = w.rothWinning ? '#2e7d32' : '#c62828';
+                                                const winner = w.rothWinning ? 'Roth' : 'Traditional';
+                                                const symbol = w.differential >= 0 ? '+' : '';
+                                                return `
+                                                    <tr style="background: ${w.age === breakevenAge ? '#fff9c4' : bgColor};">
+                                                        <td style="padding: 8px; text-align: center; border: 1px solid #ddd; font-weight: ${w.age === breakevenAge ? 'bold' : 'normal'};">
+                                                            ${w.age}${w.age === breakevenAge ? ' 🎯' : ''}
+                                                        </td>
+                                                        <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">
+                                                            ${formatValue(w.scenarioA_netWealth, inflationDivisor, showRealDollars)}
+                                                        </td>
+                                                        <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">
+                                                            ${formatValue(w.scenarioB_netWealth, inflationDivisor, showRealDollars)}
+                                                        </td>
+                                                        <td style="padding: 8px; text-align: right; border: 1px solid #ddd; color: ${textColor}; font-weight: bold;">
+                                                            ${symbol}${formatValue(w.differential, inflationDivisor, showRealDollars)}
+                                                        </td>
+                                                        <td style="padding: 8px; text-align: center; border: 1px solid #ddd; color: ${textColor}; font-weight: bold;">
+                                                            ${winner}
+                                                        </td>
+                                                    </tr>
+                                                `;
+                                            }).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div style="padding: 15px; background: #fff3e0; border-radius: 4px; border-left: 4px solid #ff9800; margin: 15px 0;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #e65100; font-size: 14px;">📊 Understanding the Table:</p>
+                                    <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                        <li><strong>Net Wealth:</strong> Total account balances (Traditional + Roth + reinvested RMDs) minus all lifetime taxes paid</li>
+                                        <li><strong>Roth Advantage:</strong> Positive numbers mean Max Roth is winning, negative means All Traditional is winning</li>
+                                        <li><strong>Breakeven (🎯):</strong> The age when Max Roth first overtakes All Traditional</li>
+                                        <li><strong>Green rows:</strong> Max Roth is ahead | <strong>Red rows:</strong> All Traditional is ahead</li>
+                                        ${breakevenAge ? `<li><strong>Yellow highlight:</strong> Breakeven age ${breakevenAge} - the turning point</li>` : ''}
+                                    </ul>
+                                </div>
+
+                                <div style="padding: 15px; background: #e8f5e9; border-radius: 4px; border-left: 4px solid #4caf50; margin: 15px 0;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #1b5e20; font-size: 14px;">🔍 McQuarrie's Perspective on Slow Payoffs:</p>
+                                    <p style="margin: 10px 0; font-size: 13px;">"Roth conversions are similar to mortgage prepayment: they provide safe, steady, certain returns, but the payoff takes a long time to materialize (typically 20-27 years). The benefits compound 'inch by inch' rather than arriving in one dramatic windfall."</p>
+                                    <p style="margin: 10px 0; font-size: 13px; font-weight: bold;">Key Insight: The first few years show very little advantage because:</p>
+                                    <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                        <li>You paid a large tax bill upfront during conversions</li>
+                                        <li>Tax savings from avoided RMDs accumulate slowly year by year</li>
+                                        <li>Compounding needs time to "gather steam"</li>
+                                        <li>Benefits are "backloaded" by the nature of exponential growth</li>
+                                    </ul>
+                                </div>
+
+                                ${breakevenAge && breakevenAge > 85 ? `
+                                    <div style="padding: 15px; background: #ffebee; border-radius: 4px; border-left: 4px solid #f44336; margin: 15px 0;">
+                                        <p style="margin-top: 0; font-weight: bold; color: #c62828; font-size: 14px;">⚠️ Late Breakeven Warning:</p>
+                                        <p style="margin: 10px 0; font-size: 13px;">Your breakeven age is ${breakevenAge}, which is quite late. McQuarrie's research shows that conversions with late breakeven ages provide minimal personal benefit - they're primarily useful for legacy planning (leaving money to heirs).</p>
+                                        <p style="margin: 10px 0; font-size: 13px;"><strong>Consider:</strong> If you need the money for your own consumption, conversions may not be optimal. They work best when you have "surplus funds" you don't plan to touch until very late in life.</p>
+                                    </div>
+                                ` : breakevenAge && breakevenAge <= 80 ? `
+                                    <div style="padding: 15px; background: #e8f5e9; border-radius: 4px; border-left: 4px solid #4caf50; margin: 15px 0;">
+                                        <p style="margin-top: 0; font-weight: bold; color: #2e7d32; font-size: 14px;">✅ Early Breakeven - Good Scenario:</p>
+                                        <p style="margin: 10px 0; font-size: 13px;">Your breakeven age is ${breakevenAge}, which is relatively early. This suggests your conversion strategy is well-suited to your situation. You're likely converting at favorable rates (12% or less) or have a significant rate differential between contribution and retirement.</p>
+                                    </div>
+                                ` : !breakevenAge ? `
+                                    <div style="padding: 15px; background: #fff3e0; border-radius: 4px; border-left: 4px solid #ff9800; margin: 15px 0;">
+                                        <p style="margin-top: 0; font-weight: bold; color: #e65100; font-size: 14px;">⚠️ No Breakeven by Age 90:</p>
+                                        <p style="margin: 10px 0; font-size: 13px;">Under these assumptions, the All Traditional strategy wins throughout your lifetime. This typically happens when:</p>
+                                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                            <li>Conversion rates are high (22%+) and retirement rates are similar or lower</li>
+                                            <li>Large pension income pushes you into higher brackets during retirement</li>
+                                            <li>State tax considerations favor keeping funds in Traditional</li>
+                                        </ul>
+                                        <p style="margin: 10px 0; font-size: 13px;"><strong>Recommendation:</strong> Consider maximizing Traditional contributions and avoiding conversions unless you can do them at very low rates (0-12%).</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
                 `;
             }
 
-            document.getElementById('scenarioComparison').innerHTML = finalScenarioHTML + rothAdvantageHTML;
+            // Gap #5: Glass Half-Full/Half-Empty Messaging
+            const glassHalfFullEmptyHTML = `
+                <div style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h3 style="color: white; margin-top: 0; margin-bottom: 15px; font-size: 20px; cursor: pointer;" onclick="toggleBreakdownSection('glass-half-full-empty')">
+                        <span id="glass-half-full-empty-icon" style="display: inline-block; width: 15px;">▶</span> 🥛 Understanding Roth Conversions: Glass Half-Full vs Glass Half-Empty
+                    </h3>
+                    <div id="glass-half-full-empty-content" style="display: none; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 6px;">
+                        <div style="font-size: 14px; color: #333; line-height: 1.8;">
+                            <p style="margin-top: 0; font-size: 15px; font-weight: bold; color: #0d47a1;">McQuarrie's central finding: Roth conversions <em>always work</em> under constant tax rates, but...</p>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                                <div style="padding: 15px; background: #e8f5e9; border-radius: 4px; border-left: 4px solid #4caf50;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #2e7d32; font-size: 16px;">🌟 Glass Half-Full</p>
+                                    <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                        <li><strong>Guaranteed to pay off</strong> due to mathematics of compounding</li>
+                                        <li>Beats market by <strong>1-2% without risk</strong></li>
+                                        <li>Similar to mortgage prepayment: <strong>conservative, reliable</strong></li>
+                                        <li>ROI on tax debit is excellent</li>
+                                        <li><strong>Always wins</strong> if you live long enough (age 90-95)</li>
+                                    </ul>
+                                </div>
+
+                                <div style="padding: 15px; background: #ffebee; border-radius: 4px; border-left: 4px solid #f44336;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #c62828; font-size: 16px;">⏰ Glass Half-Empty</p>
+                                    <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                        <li>Takes <strong>very long</strong> to pay off (breakeven age ~92)</li>
+                                        <li>Gains are <strong>modest</strong> ($42k on $100k converted by age 100)</li>
+                                        <li>Works "inch by inch" over decades</li>
+                                        <li>First year RMD averted: Only ~4% of total future benefit</li>
+                                        <li>"Must take decades to whittle away initial debit"</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div style="padding: 15px; background: #e3f2fd; border-radius: 4px; border-left: 4px solid #2196f3; margin: 15px 0;">
+                                <p style="margin-top: 0; font-weight: bold; color: #0d47a1;">📊 Typical Numbers (Constant 24% Tax Rate):</p>
+                                <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                    <li><strong>Breakeven Age:</strong> ~90-92 (for middle-bracket conversions at 22-24%)</li>
+                                    <li><strong>Annualized ROI:</strong> 1-2% on converted amount</li>
+                                    <li><strong>Example:</strong> Convert $100k at age 65 → Gain ~$42k real dollars by age 100</li>
+                                    <li><strong>Mortgage Prepayment Analogy:</strong> Similar slow, steady, certain returns</li>
+                                </ul>
+                            </div>
+
+                            <p style="margin-top: 15px; font-weight: bold;">🎯 What Really Matters: Absolute Conversion Rate, Not Rate Differentials</p>
+                            <p style="margin: 10px 0; font-size: 13px;">McQuarrie's surprising finding: <strong>Future tax rate changes matter less than expected</strong></p>
+
+                            <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px;">
+                                <thead>
+                                    <tr style="background: #f5f5f5;">
+                                        <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Scenario</th>
+                                        <th style="padding: 8px; border: 1px solid #ddd; text-align: center;">Breakeven Age</th>
+                                        <th style="padding: 8px; border: 1px solid #ddd; text-align: center;">Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">24% → 24% (no change)</td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><strong>90</strong></td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">Baseline</td>
+                                    </tr>
+                                    <tr style="background: #e8f5e9;">
+                                        <td style="padding: 8px; border: 1px solid #ddd;">24% → 28% (rate HIKE)</td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><strong>88</strong></td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2e7d32;">Only 2 years better ⬆️</td>
+                                    </tr>
+                                    <tr style="background: #ffebee;">
+                                        <td style="padding: 8px; border: 1px solid #ddd;">24% → 20% (rate CUT)</td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><strong>92</strong></td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #c62828;">Only 2 years worse, still works ⬇️</td>
+                                    </tr>
+                                    <tr style="background: #e8f5e9;">
+                                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>0-12% conversions</strong></td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center;"><strong>75-80</strong></td>
+                                        <td style="padding: 8px; border: 1px solid #ddd; text-align: center; color: #2e7d32;"><strong>SPECTACULAR! ⭐</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div style="padding: 12px; background: #fff3cd; border-left: 3px solid #ff9800; border-radius: 4px; margin: 15px 0;">
+                                <p style="margin: 5px 0; font-weight: bold;">Key Insight:</p>
+                                <p style="margin: 5px 0;">Converting at <strong>0-12% brackets</strong> is far better than converting at 24% to avert 28%. Focus on absolute conversion rate, not future vs present rate differential!</p>
+                            </div>
+
+                            <p style="margin-top: 15px; font-weight: bold;">🔄 The Intertemporal Tax Arbitrage Process:</p>
+                            <p style="margin: 10px 0; font-size: 13px;">Pay a <strong>lump sum tax NOW</strong> to reduce a <strong>stream of tax payments OVER DECADES</strong> (RMDs from age 75-90+). This works "inch by inch":</p>
+                            <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                <li><strong>Year 1 after conversion:</strong> Tax savings are tiny (~4% of total eventual benefit)</li>
+                                <li><strong>Years 2-15:</strong> Savings slowly accumulate as avoided RMDs compound</li>
+                                <li><strong>Years 16-27:</strong> Compounding accelerates, crossing breakeven around age 90-92</li>
+                                <li><strong>Beyond age 92:</strong> Advantage grows exponentially if left untouched</li>
+                            </ul>
+
+                            <p style="margin-top: 15px; padding: 12px; background: #f3e5f5; border-left: 3px solid #9c27b0; border-radius: 4px; font-size: 13px;">
+                                <strong>🎯 Bottom Line:</strong> Conversions are not a "get rich quick" strategy. They're a slow, reliable, low-risk way to incrementally improve wealth over decades. If that doesn't match your goals or timeline, conversions may not be right for you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Gap #9: NPV vs Compounding Forward - Two Perspectives
+            const npvVsCompoundingHTML = `
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h3 style="color: white; margin-top: 0; margin-bottom: 15px; font-size: 20px; cursor: pointer;" onclick="toggleBreakdownSection('npv-vs-compounding')">
+                        <span id="npv-vs-compounding-icon" style="display: inline-block; width: 15px;">▶</span> 🔍 Two Ways to Analyze Conversions: Terminal Wealth vs NPV
+                    </h3>
+                    <div id="npv-vs-compounding-content" style="display: none; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 6px;">
+                        <div style="font-size: 14px; color: #333; line-height: 1.8;">
+                            <div style="padding: 15px; background: #fff3cd; border-radius: 4px; border-left: 4px solid #ff9800; margin-bottom: 15px;">
+                                <p style="margin-top: 0; font-weight: bold; color: #856404; font-size: 16px;">Important: This Calculator Uses Only ONE Methodology</p>
+                                <p style="margin: 10px 0;">This calculator implements McQuarrie's 2021/2023 <strong>"compound forward"</strong> approach. However, his 2024 paper uses the opposite <strong>"discount back" (NPV)</strong> methodology and reaches different conclusions. You should understand BOTH perspectives.</p>
+                            </div>
+
+                            <p style="margin-top: 15px; font-weight: bold; font-size: 16px;">The Evolution of McQuarrie's Research:</p>
+                            <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                <li><strong>2021 SSRN Paper:</strong> Cautiously optimistic - "takes until 92 but works"</li>
+                                <li><strong>2023 JFP Paper:</strong> More optimistic - "most conversions show substantial payoff"</li>
+                                <li><strong>2024 JFP Paper:</strong> Pessimistic reversal - "risky bets, often disappointing"</li>
+                                <li><strong>2025 Bogleheads Forum:</strong> "I have an even more jaundiced view today"</li>
+                            </ul>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                                <div style="padding: 15px; background: #e8f5e9; border-radius: 4px; border-left: 4px solid #4caf50;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #2e7d32; font-size: 15px;">📈 Terminal Wealth (2021/2023)</p>
+                                    <p style="margin: 10px 0; font-size: 13px; font-style: italic;">"This Calculator's Approach"</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Question Asked:</strong> "At what age does total after-tax wealth favor Roth?"</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Method:</strong> Compound all taxes forward to age 90</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Example:</strong></p>
+                                    <ul style="margin: 5px 0; padding-left: 20px; font-size: 13px;">
+                                        <li>$1,000 tax at age 60 = $7,612 lost wealth at age 90 (7% for 30 years)</li>
+                                        <li>Express all taxes in "age 90 dollars"</li>
+                                    </ul>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Conclusion:</strong> "If you live to 90, you'll be wealthier with Roth"</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Typical Result:</strong> Breakeven age 90-92, Roth wins by $42k at age 100</p>
+                                </div>
+
+                                <div style="padding: 15px; background: #ffebee; border-radius: 4px; border-left: 4px solid #f44336;">
+                                    <p style="margin-top: 0; font-weight: bold; color: #c62828; font-size: 15px;">💰 NPV Analysis (2024)</p>
+                                    <p style="margin: 10px 0; font-size: 13px; font-style: italic;">"Investment Decision Framework"</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Question Asked:</strong> "What is the NPV of conversion as an investment decision?"</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Method:</strong> Discount future tax savings back to present value at portfolio return rate</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Example:</strong></p>
+                                    <ul style="margin: 5px 0; padding-left: 20px; font-size: 13px;">
+                                        <li>$100k conversion at 22% = $22k tax paid NOW</li>
+                                        <li>NPV of future savings = ~$3k (discounted at 6%)</li>
+                                        <li>First year savings: Only $107</li>
+                                    </ul>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Conclusion:</strong> "But the NPV of that future wealth is small today"</p>
+                                    <p style="margin: 10px 0; font-size: 13px;"><strong>Typical Result:</strong> Small or negative NPV, must survive to age 97+ for NPV breakeven</p>
+                                </div>
+                            </div>
+
+                            <div style="padding: 15px; background: #e3f2fd; border-radius: 4px; border-left: 4px solid #2196f3; margin: 15px 0;">
+                                <p style="margin-top: 0; font-weight: bold; color: #0d47a1;">Why Both Can Be "Correct"</p>
+                                <p style="margin: 10px 0; font-size: 13px;">These are different analytical frameworks asking different questions:</p>
+                                <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                    <li><strong>Compounding forward</strong> = Comparing terminal wealth at a future age (good for estate planning, leaving money to heirs)</li>
+                                    <li><strong>Discounting back</strong> = Evaluating conversion as an investment decision (good for understanding today's value of future benefits)</li>
+                                </ul>
+                            </div>
+
+                            <p style="margin-top: 15px; font-weight: bold;">📊 McQuarrie's 2024 Base Case Example:</p>
+                            <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px;">
+                                <thead>
+                                    <tr style="background: #f5f5f5;">
+                                        <th style="padding: 6px; border: 1px solid #ddd; text-align: left;">Metric</th>
+                                        <th style="padding: 6px; border: 1px solid #ddd; text-align: right;">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 6px; border: 1px solid #ddd;">Conversion Amount</td>
+                                        <td style="padding: 6px; border: 1px solid #ddd; text-align: right;">$100,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px; border: 1px solid #ddd;">Conversion Tax (22%)</td>
+                                        <td style="padding: 6px; border: 1px solid #ddd; text-align: right;">$22,000 paid NOW</td>
+                                    </tr>
+                                    <tr style="background: #e8f5e9;">
+                                        <td style="padding: 6px; border: 1px solid #ddd;">NPV of Future Tax Savings</td>
+                                        <td style="padding: 6px; border: 1px solid #ddd; text-align: right;">~$3,000 (discounted at 6%)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px; border: 1px solid #ddd;">Net NPV</td>
+                                        <td style="padding: 6px; border: 1px solid #ddd; text-align: right;"><strong>-$19,000 (negative!)</strong></td>
+                                    </tr>
+                                    <tr style="background: #ffebee;">
+                                        <td style="padding: 6px; border: 1px solid #ddd;">First Year Savings (discounted)</td>
+                                        <td style="padding: 6px; border: 1px solid #ddd; text-align: right;">$107 (only 3.6% of $3k total)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div style="padding: 12px; background: #f3e5f5; border-left: 3px solid #9c27b0; border-radius: 4px; margin: 15px 0;">
+                                <p style="margin: 5px 0; font-weight: bold; color: #4a148c;">McQuarrie's 2024 Conclusion:</p>
+                                <p style="margin: 5px 0; font-size: 13px; font-style: italic;">"Conversions emerge as a risky bet, often with small upside and substantial downside... almost certain to be disappointing if intended to benefit clients during their own lifetimes unless conversion occurs at single-digit rates."</p>
+                            </div>
+
+                            <p style="margin-top: 15px; font-weight: bold;">✅ When Conversions ARE Beneficial (Consensus Across All Papers):</p>
+                            <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                <li><strong>Legacy planning:</strong> Leaving money to heirs in substantially higher tax brackets</li>
+                                <li><strong>Temporarily low-income retirees:</strong> Converting at 0-12% brackets</li>
+                                <li><strong>Backdoor Roth at 0%:</strong> All papers agree these are "great"</li>
+                                <li><strong>Long planning horizons:</strong> Living to mid-90s or beyond</li>
+                                <li><strong>Before age 63:</strong> Avoid Medicare IRMAA triggers</li>
+                            </ul>
+
+                            <p style="margin-top: 15px; font-weight: bold;">❌ When Conversions Are Poor (Consensus):</p>
+                            <ul style="margin: 10px 0; padding-left: 20px; font-size: 13px;">
+                                <li>Short planning horizons / limited life expectancy</li>
+                                <li>High-bracket earners in high-tax states (CA, NY)</li>
+                                <li>Money going to charity or low-income heirs</li>
+                                <li>Funds needed for consumption (will blow up conversion benefits)</li>
+                                <li><strong>2024 addition:</strong> Clients expecting personal benefit during lifetime (unless single-digit rates)</li>
+                            </ul>
+
+                            <p style="margin-top: 15px; padding: 12px; background: #fff3cd; border-left: 3px solid #ff9800; border-radius: 4px; font-size: 13px;">
+                                <strong>Bottom Line:</strong> This calculator shows the optimistic "terminal wealth" view. For a complete picture, also consider the pessimistic "NPV" view from McQuarrie's 2024 paper. Both perspectives are valid—they just answer different questions about conversion value.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Gap #6: Early Distribution Warning
+            const earlyDistributionWarningHTML = `
+                <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h3 style="color: white; margin-top: 0; margin-bottom: 15px; font-size: 20px; cursor: pointer;" onclick="toggleBreakdownSection('early-dist-warning')">
+                        <span id="early-dist-warning-icon" style="display: inline-block; width: 15px;">▶</span> CRITICAL WARNING: Do Not Touch Converted Roth Funds Before Age 90+
+                    </h3>
+                    <div id="early-dist-warning-content" style="display: none; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 6px;">
+                        <div style="font-size: 14px; color: #333; line-height: 1.8;">
+                            <div style="padding: 15px; background: #ffebee; border-radius: 4px; border-left: 4px solid #f44336; margin-bottom: 15px;">
+                                <p style="margin-top: 0; font-weight: bold; color: #c62828; font-size: 16px;">This May Be the Most Important Thing to Understand About Roth Conversions</p>
+                                <p style="margin: 10px 0;"><strong>McQuarrie's Finding:</strong> "If distributions from the Roth begin to be taken at age 80... pretax breakeven is not reached by age 100. ROI continues to be positive until age 90, after which the Roth conversion yields a <strong>negative return</strong>."</p>
+                            </div>
+
+                            <p style="margin-top: 15px;"><strong>What This Means:</strong></p>
+                            <ul style="margin: 10px 0; padding-left: 25px;">
+                                <li><strong>Taking Roth distributions early "may blow up" the conversion</strong></li>
+                                <li>Prevents compounding from gathering steam</li>
+                                <li>Benefits of compounding are "backloaded" by nature of exponential processes</li>
+                                <li>You could end up <em>worse off</em> than if you'd never converted at all</li>
+                            </ul>
+
+                            <div style="padding: 15px; background: #e3f2fd; border-radius: 4px; border-left: 4px solid #2196f3; margin: 15px 0;">
+                                <p style="margin-top: 0; font-weight: bold; color: #0d47a1;">McQuarrie's Core Message:</p>
+                                <p style="margin: 10px 0; font-style: italic;">"Roth conversions are designed to increase <strong>financial wealth</strong>. If used instead to increase <strong>consumption wealth</strong>, they may blow up. Clients need to be advised that conversions should be limited to <strong>funds expected to be surplus</strong>."</p>
+                            </div>
+
+                            <p style="margin-top: 15px;"><strong>The Right Way to Think About Converted Roth Funds:</strong></p>
+                            <p style="margin: 10px 0; padding: 12px; background: #e8f5e9; border-left: 3px solid #4caf50; border-radius: 4px;">
+                                <strong>"For affluent professionals, Roth conversions are not about living better or sustaining spending power for longer; conversion is a stratagem to increase after-tax wealth for emergency use late in life, and/or to pass on greater amounts of after-tax wealth to heirs. <span style="text-decoration: underline;">That money is best not touched beforehand.</span>"</strong>
+                            </p>
+
+                            <p style="margin-top: 15px;"><strong>Common Misconception:</strong></p>
+                            <div style="padding: 12px; background: #fff3cd; border-left: 3px solid #ff9800; border-radius: 4px;">
+                                <p style="margin: 5px 0;"><strong>❌ WRONG:</strong> "Tax-free Roth withdrawals mean I should spend from Roth first"</p>
+                                <p style="margin: 5px 0;"><strong>✓ CORRECT:</strong> "Conversions are for wealth accumulation, not consumption. Spend from Traditional/taxable first, leave Roth to compound."</p>
+                            </div>
+
+                            <p style="margin-top: 15px;"><strong>Who Should Convert?</strong></p>
+                            <p style="margin: 10px 0;">Only convert amounts you're confident you won't need to touch until very late in life (age 90+) or to pass to heirs. If you think you might need the money for living expenses in your 70s or 80s, <strong>don't convert those funds</strong>.</p>
+
+                            <p style="margin-top: 15px; padding: 12px; background: #f3e5f5; border-left: 3px solid #9c27b0; border-radius: 4px; font-size: 13px;">
+                                <strong>📊 Bottom Line:</strong> The calculator's projections assume converted Roth funds are left completely untouched to compound. Taking early distributions invalidates these projections and could turn a profitable conversion into a loss.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('scenarioComparison').innerHTML = finalScenarioHTML + bracketFillingHTML + breakevenAnalysisHTML + npvVsCompoundingHTML + glassHalfFullEmptyHTML + earlyDistributionWarningHTML;
             document.getElementById('taxBreakdown').innerHTML = scenarioA_sideBySide + scenarioB_sideBySide + rmdHTML;
             } catch (error) {
                 console.error('Error in updatePlot:', error);
@@ -3320,7 +4080,7 @@
                         <li style="margin-bottom: 8px;"><strong>Indifferent if tax rates are the same:</strong> Theory says after-tax wealth should be identical either way</li>
                     </ol>
                     <p style="margin: 10px 0; padding: 10px; background: #ffebee; border-left: 3px solid #f44336; border-radius: 4px; font-size: 13px;">
-                        <strong>⚠️ The Problem:</strong> In practice, motivated advisors can always recommend a conversion by arguing "taxes are going up!" Additionally, conventional wisdom claims paying conversion tax from outside funds (rather than from converted funds) produces superior results—but McQuarrie shows this involves many pitfalls and is not as beneficial as commonly believed.
+                        <strong>The Problem:</strong> In practice, motivated advisors can always recommend a conversion by arguing "taxes are going up!" Additionally, conventional wisdom claims paying conversion tax from outside funds (rather than from converted funds) produces superior results—but McQuarrie shows this involves many pitfalls and is not as beneficial as commonly believed.
                     </p>
 
                     <p style="margin-top: 20px; font-weight: bold; color: #f5576c;">📊 How Much Do You Need to Face High Tax Brackets?</p>
@@ -3355,7 +4115,7 @@
                     <p style="margin: 10px 0;">While the benefits from a Roth conversion are often small and slow to arrive, a Roth conversion will almost always pay off if given enough time—for life spans that extend past 90 and so long as annual distributions from converted amounts are not taken. <strong>Roth conversions work because of compounding</strong>, which requires the conversion to be left undisturbed for a long time.</p>
 
                     <p style="margin-top: 20px; padding: 12px; background: #fff3cd; border-left: 3px solid #ffc107; border-radius: 4px;">
-                        <strong>💡 Bottom Line:</strong> The mathematics of compounding underwrite the success of Roth conversions. The longer you can leave converted amounts untouched, the more powerful the benefits become. The greatest opportunity exists for high earners who retire early and can convert during low-income gap years.
+                        <strong>Bottom Line:</strong> The mathematics of compounding underwrite the success of Roth conversions. The longer you can leave converted amounts untouched, the more powerful the benefits become. The greatest opportunity exists for high earners who retire early and can convert during low-income gap years.
                     </p>
 
                     <p style="margin-top: 20px; font-weight: bold; color: #f5576c;">⏱️ Time Value of Money in Roth Conversions</p>
@@ -3376,22 +4136,22 @@
                         <strong>✓ Roth Advantage:</strong> By converting during low-tax years (ages 59-74), you pay tax at favorable rates and then enjoy <strong>unlimited tax-free compounding</strong> with no RMDs. The full balance compounds uninterrupted, and withdrawals are completely tax-free and don't trigger Social Security taxation or IRMAA surcharges.
                     </p>
 
-                    <p style="margin-top: 20px; font-weight: bold; color: #f5576c;">💎 The Power of Compounding: Why Roth Conversions Always Win in the Long Run</p>
+                    <p style="margin-top: 20px; font-weight: bold; color: #f5576c;">The Power of Compounding: Why Roth Conversions Always Win in the Long Run</p>
                     <p style="margin: 10px 0; font-size: 13px;">McQuarrie illustrates this with a striking thought experiment: If a Roman centurion at the time of Christ had invested one drachma at 4% for 2,000 years, what would it be worth? "A huge number." But what if a second centurion invested the same amount but paid 12% tax on interest each year, earning only 3.52%?</p>
                     <p style="margin: 10px 0; font-size: 13px;"><strong>The critical insight:</strong> After 996 years, the first centurion would have <strong>100× the wealth</strong> of the second. Put differently: one penny invested at 4% tax-free eventually equals one dollar invested at 3.52% taxed.</p>
                     <p style="margin: 10px 0; padding: 10px; background: #e3f2fd; border-left: 3px solid #2196F3; border-radius: 4px; font-size: 13px;">
-                        <strong>📐 The Math Principle:</strong><br>
+                        <strong>The Math Principle:</strong><br>
                         • <strong>One-time tax hit</strong> (Roth conversion): Arithmetic reduction (pay 24% → start with 76% of amount)<br>
                         • <strong>Ongoing tax drag</strong> (Traditional + RMDs): Exponential reduction (smaller balance compounds every year)<br>
                         • <strong>Result:</strong> Given enough time, the exponential function (tax-free compounding) <em>must</em> overcome any initial deficit
                     </p>
                     <p style="margin: 10px 0; font-size: 13px;"><strong>Roth conversions left untouched always win—in the long run.</strong> Even a 99% conversion tax eventually gets beaten by tax-free compounding, given enough years. Changes in future tax rates only moderate the <em>pace and scale</em> of the win, not the eventual outcome.</p>
-                    <p style="margin: 10px 0; padding: 10px; background: #fff3e0; border-left: 3px solid #ff9800; border-radius: 4px; font-size: 12px;">
-                        <strong>⚠️ The Catch:</strong> This requires leaving the Roth untouched to compound and living long enough to reach the crossover point. For typical retirees (not Roman centurions), this usually means life spans extending into the late 80s or 90s. The calculator models this by comparing wealth at age 90.
+                    <p style="margin: 10px 0; padding: 10px; background: #fff3e0; border-left: 3px solid #ff9800; border-radius: 4px; font-size: 13px;">
+                        <strong>The Catch:</strong> This requires leaving the Roth untouched to compound and living long enough to reach the crossover point. For typical retirees (not Roman centurions), this usually means life spans extending into the late 80s or 90s. The calculator models this by comparing wealth at age 90.
                     </p>
 
-                    <p style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-left: 3px solid #9e9e9e; border-radius: 4px; font-size: 12px;">
-                        <strong>⚙️ Calculator Methodology:</strong> This calculator addresses McQuarrie's key methodological concerns:
+                    <p style="margin-top: 15px; padding: 10px; background: #f5f5f5; border-left: 3px solid #9e9e9e; border-radius: 4px; font-size: 13px;">
+                        <strong>Calculator Methodology:</strong> This calculator addresses McQuarrie's key methodological concerns:
                         <br><br>
                         <strong>Inflation Adjustments:</strong> Tax bracket boundaries, standard deductions, IRMAA thresholds, and NIIT thresholds all inflate annually at your specified rate. This prevents false conclusions from comparing today's brackets to future income.
                         <br><br>
@@ -3427,19 +4187,19 @@
 
     <!-- Bibliography Section -->
     <div style="max-width: 1200px; margin: 20px auto; padding: 25px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 5px;">
-        <h3 style="color: #333; margin-top: 0; margin-bottom: 15px; font-size: 18px; border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">📚 Bibliography & References</h3>
+        <h3 style="color: #333; margin-top: 0; margin-bottom: 15px; font-size: 18px; border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">Bibliography & References</h3>
 
         <div style="font-size: 13px; color: #333; line-height: 1.8;">
             <p style="margin-top: 0; margin-bottom: 15px;"><strong>Research Papers & Academic Articles:</strong></p>
             <ul style="margin: 0 0 20px 20px; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <strong>McQuarrie, Edward F.</strong> "When and for Whom Are Roth Conversions Most Beneficial? A New Set of Guidelines, Cautions and Caveats." (June 4, 2021). Available at SSRN.
-                    <br><a href="https://ssrn.com/abstract=3860359" style="font-size: 11px; color: #1976D2; text-decoration: none;">https://ssrn.com/abstract=3860359</a> or <a href="http://dx.doi.org/10.2139/ssrn.3860359" style="font-size: 11px; color: #1976D2; text-decoration: none;">http://dx.doi.org/10.2139/ssrn.3860359</a>
-                    <br><span style="font-size: 11px; color: #666;">Primary source for conversion strategy insights, tax arbitrage opportunities, and the zero-bracket advantage.</span>
+                    <br><a href="https://ssrn.com/abstract=3860359" style="font-size: 13px; color: #1976D2; text-decoration: none;">https://ssrn.com/abstract=3860359</a> or <a href="http://dx.doi.org/10.2139/ssrn.3860359" style="font-size: 13px; color: #1976D2; text-decoration: none;">http://dx.doi.org/10.2139/ssrn.3860359</a>
+                    <br><span style="font-size: 13px; color: #666;">Primary source for conversion strategy insights, tax arbitrage opportunities, and the zero-bracket advantage.</span>
                 </li>
                 <li style="margin-bottom: 10px;">
-                    <strong>DiLellio, James A. and McQuarrie, Edward F.</strong> "The Arithmetic of Roth Conversions." <em>Journal of Financial Planning</em> (2023).
-                    <br><span style="font-size: 11px; color: #666;">Mathematical framework for understanding Roth conversion economics and compounding effects.</span>
+                    <strong>McQuarrie, Edward F., and James A. DiLellio.</strong> 2023. "The Arithmetic of Roth Conversions." <em>Journal of Financial Planning</em> 36 (05): 72–89.
+                    <br><span style="font-size: 13px; color: #666;">Mathematical framework for understanding Roth conversion economics and compounding effects.</span>
                 </li>
             </ul>
 
@@ -3447,18 +4207,18 @@
             <ul style="margin: 0 0 20px 20px; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <strong>Internal Revenue Service (IRS).</strong> "Retirement Topics - Required Minimum Distributions (RMDs)." IRS.gov.
-                    <br><a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds" style="font-size: 11px; color: #1976D2; text-decoration: none;">https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds</a>
-                    <br><span style="font-size: 11px; color: #666;">Official IRS guidance on RMD ages and distribution requirements (updated with SECURE 2.0 Act changes).</span>
+                    <br><a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds" style="font-size: 13px; color: #1976D2; text-decoration: none;">https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds</a>
+                    <br><span style="font-size: 13px; color: #666;">Official IRS guidance on RMD ages and distribution requirements (updated with SECURE 2.0 Act changes).</span>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <strong>Internal Revenue Service (IRS).</strong> "IRS provides tax inflation adjustments for tax year 2026." IRS.gov (October 2025).
-                    <br><a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" style="font-size: 11px; color: #1976D2; text-decoration: none;">https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026</a>
-                    <br><span style="font-size: 11px; color: #666;">2026 federal tax brackets, standard deductions, and contribution limits.</span>
+                    <br><a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" style="font-size: 13px; color: #1976D2; text-decoration: none;">https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026</a>
+                    <br><span style="font-size: 13px; color: #666;">2026 federal tax brackets, standard deductions, and contribution limits.</span>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <strong>State of California Franchise Tax Board.</strong> "California Tax Rates, Exemptions, and Credits." FTB.ca.gov (2026).
-                    <br><a href="https://www.ftb.ca.gov/forms/2026/2026-540-tax-rate-schedules.html" style="font-size: 11px; color: #1976D2; text-decoration: none;">https://www.ftb.ca.gov/forms/2026/2026-540-tax-rate-schedules.html</a>
-                    <br><span style="font-size: 11px; color: #666;">2026 California state income tax brackets and rates.</span>
+                    <br><a href="https://www.ftb.ca.gov/forms/2026/2026-540-tax-rate-schedules.html" style="font-size: 13px; color: #1976D2; text-decoration: none;">https://www.ftb.ca.gov/forms/2026/2026-540-tax-rate-schedules.html</a>
+                    <br><span style="font-size: 13px; color: #666;">2026 California state income tax brackets and rates.</span>
                 </li>
             </ul>
 
@@ -3466,8 +4226,8 @@
             <ul style="margin: 0 0 20px 20px; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <strong>Centers for Medicare & Medicaid Services (CMS).</strong> "Medicare Costs." Medicare.gov (2026).
-                    <br><a href="https://www.medicare.gov/basics/costs/medicare-costs" style="font-size: 11px; color: #1976D2; text-decoration: none;">https://www.medicare.gov/basics/costs/medicare-costs</a>
-                    <br><span style="font-size: 11px; color: #666;">Official Medicare Part B and Part D Income-Related Monthly Adjustment Amount (IRMAA) brackets.</span>
+                    <br><a href="https://www.medicare.gov/basics/costs/medicare-costs" style="font-size: 13px; color: #1976D2; text-decoration: none;">https://www.medicare.gov/basics/costs/medicare-costs</a>
+                    <br><span style="font-size: 13px; color: #666;">Official Medicare Part B and Part D Income-Related Monthly Adjustment Amount (IRMAA) brackets.</span>
                 </li>
             </ul>
 
@@ -3475,12 +4235,12 @@
             <ul style="margin: 0 0 20px 20px; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <strong>Slott, Ed.</strong> "The Retirement Savings Time Bomb... and How to Defuse It." Penguin Books (2021).
-                    <br><span style="font-size: 11px; color: #666;">Source of the "tax debt" concept - the idea that traditional IRA/401k balances include a tax liability owed to the government.</span>
+                    <br><span style="font-size: 13px; color: #666;">Source of the "tax debt" concept - the idea that traditional IRA/401k balances include a tax liability owed to the government.</span>
                 </li>
                 <li style="margin-bottom: 10px;">
                     <strong>Kitces, Michael.</strong> "Understanding The Two 'Buckets' Strategy For Spending In Retirement." Nerd's Eye View (Kitces.com).
-                    <br><a href="https://www.kitces.com/blog/" style="font-size: 11px; color: #1976D2; text-decoration: none;">https://www.kitces.com/blog/</a>
-                    <br><span style="font-size: 11px; color: #666;">Tax diversification strategies and Roth vs Traditional analysis frameworks.</span>
+                    <br><a href="https://www.kitces.com/blog/" style="font-size: 13px; color: #1976D2; text-decoration: none;">https://www.kitces.com/blog/</a>
+                    <br><span style="font-size: 13px; color: #666;">Tax diversification strategies and Roth vs Traditional analysis frameworks.</span>
                 </li>
             </ul>
 
@@ -3488,16 +4248,16 @@
             <ul style="margin: 0 0 20px 20px; padding: 0;">
                 <li style="margin-bottom: 10px;">
                     <strong>Social Security Administration (SSA).</strong> "Income Taxes And Your Social Security Benefit." SSA.gov.
-                    <br><a href="https://www.ssa.gov/benefits/retirement/planner/taxes.html" style="font-size: 11px; color: #1976D2; text-decoration: none;">https://www.ssa.gov/benefits/retirement/planner/taxes.html</a>
-                    <br><span style="font-size: 11px; color: #666;">Provisional income calculation and Social Security benefit taxation thresholds.</span>
+                    <br><a href="https://www.ssa.gov/benefits/retirement/planner/taxes.html" style="font-size: 13px; color: #1976D2; text-decoration: none;">https://www.ssa.gov/benefits/retirement/planner/taxes.html</a>
+                    <br><span style="font-size: 13px; color: #666;">Provisional income calculation and Social Security benefit taxation thresholds.</span>
                 </li>
             </ul>
 
-            <p style="margin-top: 20px; padding: 10px; background: #fff3cd; border-left: 3px solid #ffc107; border-radius: 4px; font-size: 12px;">
+            <p style="margin-top: 20px; padding: 10px; background: #fff3cd; border-left: 3px solid #ffc107; border-radius: 4px; font-size: 13px;">
                 <strong>Disclaimer:</strong> This calculator is for educational and informational purposes only. It is not financial, tax, or legal advice. Tax laws change frequently, and individual circumstances vary significantly. Always consult with qualified tax professionals, financial advisors, and/or estate planning attorneys before making important financial decisions. The accuracy of results depends on the assumptions and inputs provided.
             </p>
 
-            <p style="margin-top: 15px; font-size: 12px; color: #666; text-align: center;">
+            <p style="margin-top: 15px; font-size: 13px; color: #666; text-align: center;">
                 Calculator created: January 2026 | Last updated: January 2026
             </p>
         </div>
@@ -3532,350 +4292,6 @@
     }
     </script>
 
-    <!-- TODO: Future Enhancements -->
-    <!--
-    TODO: Implement phase-based return rates (per McQuarrie Table 1)
 
-    Current Implementation:
-    - Single CAGR used for all life phases (working, conversion, RMD periods)
-    - Default 5% nominal return, 3% inflation
-
-    McQuarrie's Approach (Table 1):
-    - Working years (accumulation): ~7% nominal return
-      * Based on target date fund allocation (~70% stocks during accumulation)
-      * Stocks: 8% nominal (6% appreciation + 2% dividends) = 5.5% real
-      * Bonds: 4.5% nominal = 2% real
-      * Blended: ~7% nominal with aggressive allocation
-
-    - Retirement (age 72+): 5.2% nominal return
-      * Based on Vanguard Retirement Income fund allocation (30/70 stocks/bonds)
-      * More conservative allocation as age increases
-      * Real return: 2.6%
-
-    - Inflation: 2.5% (actual 1989-2019 average per Ibbotson SBBI yearbook)
-
-    Implementation Strategy:
-    1. Add "Use age-based returns" checkbox
-    2. If enabled, use different CAGR for:
-       - Working years (currentAge to retirementAge): 7% nominal
-       - Conversion period (retirementAge to rmdAge): 5.2% nominal (transitional)
-       - RMD period (rmdAge to 90): 5.2% nominal (conservative allocation)
-    3. Keep single CAGR as default for simplicity
-    4. Add help text explaining the rationale for age-based returns
-
-    Trade-offs:
-    - More accurate modeling of real-world asset allocation changes
-    - Increases complexity - need to explain why returns change
-    - McQuarrie's specific rates based on 2021 Vanguard fund allocations (may drift over time)
-    - Current blended 5% approach is simpler and allows user adjustment
-
-    References:
-    - McQuarrie (2021) Table 1: "Stylized Asset Returns for Projecting Accumulations"
-    - Vanguard Target Date Funds historical allocations
-    - Vanguard Retirement Income Fund (VRI) allocation data
-
-    ---
-
-    TODO: Implement realistic accumulation model (per McQuarrie Table 3)
-
-    Current Implementation:
-    - User enters "Total Annual 401k Budget" (fixed amount)
-    - No wage growth over working years
-    - No inflation-adjusted contribution limit increases
-    - No age 50+ catch-up contributions modeled separately
-    - No explicit employer match (user includes it in total budget)
-    - No savings rate validation (contribution as % of income)
-    - Single CAGR applied to all years (no target date glide path)
-
-    McQuarrie's Approach (Table 3):
-    - Models 30-year accumulation with realistic assumptions
-    - Contribution limits inflate annually at 2.5%
-    - Age 50+ catch-up contributions ($9,201 in 2020 example, inflates)
-    - Employer match as % of salary (e.g., 3% match = "50% of first 6%")
-    - Wage growth over career (3.5% annually = 1% real growth)
-    - Savings rate calculated and validated (<15% is "reasonable")
-    - Target date fund returns change by decade as glide path progresses:
-      * Age 35: 7.48% (aggressive ~90% stocks)
-      * Age 45: 7.21%
-      * Age 55: 6.69%
-      * Age 64: 6.56%
-      * Age 65-71: 5.51% (transitioning to retirement allocation)
-
-    Key Insights from Table 3:
-    - Peak earner ($400k at age 64) can accumulate ~$4.2M over 30 years
-    - Requires maxing contributions consistently (12-15% of income)
-    - Gets ~$6k/year employer match
-    - Accumulation scales linearly with income for lower earners
-    - Does NOT scale linearly for higher earners (contribution limits cap)
-    - Client at $200k income → ~$2M balance → 22% RMD bracket
-    - Client at $800k income → NOT $8M balance (due to limits)
-
-    Implementation Strategy:
-    1. Add "Use detailed accumulation model" checkbox
-    2. If enabled, add input fields:
-       - Current salary/wages
-       - Expected wage growth rate (default 3.5%)
-       - Employer match percentage (default 3%)
-       - Age 50+ catch-up toggle (auto-enable when appropriate)
-    3. During accumulation loop:
-       - Inflate contribution limits annually
-       - Add catch-up contribution if age >= 50
-       - Calculate employer match from salary
-       - Track contribution as % of income, warn if >15%
-       - Apply age-based returns from glide path table
-       - Show running wage and savings rate
-    4. Display accumulation details:
-       - "Contribution as % of income: X.X% (reasonable/high)"
-       - "Projected balance at retirement: $X.XX MM"
-       - "This puts you in the XX% RMD bracket"
-       - Comparison to McQuarrie benchmarks
-
-    Benefits:
-    - More accurate projections for younger users with long accumulation phase
-    - Validates if savings goals are realistic given income
-    - Shows impact of employer match vs solo accumulation
-    - Helps users understand relationship between salary, savings rate, and final balance
-    - Addresses McQuarrie's point: "even maxing out for 30 years barely gets to 24% bracket"
-
-    Trade-offs:
-    - Significantly more complex UI
-    - More inputs for user to configure
-    - Wage growth assumptions may not match reality (promotions, career changes)
-    - Current simple approach lets users directly specify their contribution
-
-    References:
-    - McQuarrie (2021) Table 3: "How to Accumulate a TDA Balance over $4 Million"
-    - Historical 401k contribution limits (IRS archives)
-    - Vanguard Target Date Fund glide path documentation
-
-    ---
-
-    TODO: Implement McQuarrie's "exact counterfactual" methodology for RMD reinvestment
-
-    Current Implementation:
-    - RMDs are withdrawn from Traditional balance and disappear (assumed spent)
-    - Line ~1103: tradBalance -= rmd;
-    - No after-tax reinvestment of RMDs
-    - Assumption: RMDs are used for living expenses in retirement
-
-    McQuarrie's Base Case (Exact Counterfactual):
-    - Goal: Maintain exact comparison between Roth conversion vs no conversion
-    - Both scenarios contain same amount of unconverted funds
-    - RMDs are deducted annually per IRS schedule
-
-    Conversion scenario:
-    - $100k converted to Roth
-    - Grows tax-free, no RMD requirement
-    - No distributions taken from Roth (surplus funds, long-term investment)
-
-    No-conversion scenario (3 sub-accounts):
-    1. Bulk TDA: Unconverted balance (same in both scenarios)
-    2. Segregated sub-account: $100k that would have been converted
-       - Tracks exactly what was converted
-       - Takes RMDs on this portion starting at age 75
-       - These are "RMDs avoided by conversion"
-    3. After-tax reinvestment account:
-       - RMDs on segregated account (minus taxes) are reinvested
-       - Holds same stock asset as Roth
-       - Subject to annual dividend taxes
-       - Prevents falsely inflating Roth advantage
-
-    Key Quote from McQuarrie:
-    "Absent this second sub-account, the no-conversion account would throw off
-    extra consumption wealth, as the RMDs on the segregated fund disappear from
-    the worksheet as spent. Without reinvestment of their after-tax amount, the
-    wealth-generating effect of the Roth conversion would be falsely inflated."
-
-    Why This Matters:
-    - McQuarrie models "surplus funds invested for the very long term" (Young 2020)
-    - For affluent couples in 60s, these are NOT funds needed for consumption
-    - Fair comparison: Roth compounds untouched vs RMDs reinvested after-tax
-    - Current calculator assumes RMDs are spent = different use case
-
-    Two Valid Scenarios:
-    1. McQuarrie's approach: RMDs reinvested (modeling wealth accumulation)
-       - Appropriate for affluent professionals with surplus funds
-       - Focus: terminal wealth at death (age 85-90+)
-       - Question: Should I convert funds I'll never spend?
-
-    2. Calculator's current approach: RMDs spent (modeling consumption)
-       - Appropriate for retirees living on portfolio
-       - Focus: lifetime after-tax income and final balance
-       - Question: Which strategy gives me more to spend?
-
-    Implementation Strategy:
-    1. Add "RMD treatment" dropdown:
-       - "Spend RMDs (current)" - RMDs disappear, used for living expenses
-       - "Reinvest RMDs after-tax (McQuarrie base case)" - implement counterfactual
-
-    2. If "Reinvest RMDs" selected:
-       - Create segregated tracking variable for converted amount
-       - Calculate RMDs specifically on segregated portion
-       - Reinvest after-tax RMDs in taxable account
-       - Apply annual dividend taxes to reinvested balance
-       - Add reinvested balance to final wealth calculation
-
-    3. Update final comparison:
-       - With-conversion: Roth balance (tax-free)
-       - No-conversion: Remaining TDA + after-tax reinvested RMD account
-       - On liquidation: Compare after-tax values (capital gains on reinvested)
-
-    4. Display implications:
-       - Show "Reinvested RMD balance" as separate line item
-       - Note embedded capital gains in reinvested account
-       - Compare liquidation values at ages 85, 90, 95
-
-    Impact on Results:
-    - Reinvesting RMDs will reduce Roth advantage vs current method
-    - Makes comparison fairer for "surplus funds" scenario
-    - But adds significant complexity to model
-    - Most users may prefer simpler "RMDs = spending money" assumption
-
-    References:
-    - McQuarrie (2021) "Spreadsheet set up for base case" section
-    - McQuarrie (2021) Tables A.1 and A.2 (year-by-year results)
-    - Young (2020) on surplus fund investment for very long term
-    - McQuarrie spreadsheets (linked in online paper for download)
-
-    ---
-
-    TODO: Add detailed breakeven and liquidation analysis (per McQuarrie Figure 4 & Table 4)
-
-    Current Implementation:
-    - Shows single breakeven age (when Roth net wealth overtakes Traditional)
-    - Compares final balances at age 90
-    - Net earnings = balances - cumulative taxes
-
-    McQuarrie's Detailed Analysis (Missing):
-
-    1. Pre-tax Breakeven Tracking (Figure 4):
-       - Shows wealth as % of total account value over time
-       - Age 72 (just before RMDs): -1% (about -$40k in the hole from tax debit)
-       - Conversion catches up slowly at first, accelerates after age 80
-       - Breakeven at age 92 (pretax)
-       - By age 100: 103.4% of no-conversion value (+$42k real wealth)
-
-    2. Pace of Catch-Up Visualization:
-       - Graph showing Roth surplus over time
-       - Demonstrates "glass half-full/half-empty" dynamic
-       - Takes 27 years (age 65 → 92) to break even under constant 24% rates
-       - Shows acceleration in later years
-
-    3. Liquidation Surplus Analysis (Table 4):
-       - After-tax Roth surplus at ages 85, 90, 95, 100
-       - Accounts for step-up basis on reinvested RMDs at death
-       - Shows real dollar advantage: ~$20k at age 85, growing with age
-       - Converts to annualized ROI:
-         * Age 85: ~1.0% annualized return on converted amount
-         * Age 100: ~2.0% annualized return
-
-    4. ROI Perspectives:
-       - ROI on converted amount ($100k): Modest (1-2% annually)
-       - ROI on tax debit (~$24k): Much better, exceeds stock returns
-       - Incremental ROI: Beating market by 1-2% without extra risk
-
-    5. Real Dollar Terms:
-       - All values shown in constant 2020 dollars (inflation-adjusted)
-       - By age 100: $42k real wealth gain (about half the converted amount)
-       - Demonstrates that nominal gains can be deceptive
-
-    Key Findings Not Currently Shown:
-    - "Glass half-full": Even constant tax rates eventually create wealth
-    - "Glass half-empty": Takes very long time, modest absolute gains
-    - Clients may be "underwhelmed by the pace" of catch-up
-    - Small % of account (4% converted) gains only ~2% annually over 35 years
-    - BUT: Beating market by 1-2% without risk is valuable
-    - Liquidation advantage exists even by age 85 ($20k real dollars)
-
-    Implementation Strategy:
-
-    1. Add "Detailed Breakeven Analysis" collapsible section:
-       - Chart showing wealth differential by age (65 → 100)
-       - Starting point: -$X from conversion tax
-       - Year-by-year tracking as % of total account value
-       - Mark breakeven age prominently
-       - Show acceleration phase (typically after age 80)
-
-    2. Add "Liquidation Value Comparison" table:
-       - Ages: 85, 90, 95, 100
-       - Columns:
-         * Roth balance (tax-free liquidation)
-         * Traditional balance (taxed at marginal rate)
-         * Reinvested RMD account (with embedded capital gains)
-         * After-tax Traditional total
-         * Roth surplus (real dollars)
-         * Annualized ROI on converted amount
-         * Annualized ROI on tax debit
-
-    3. Calculate multiple ROI metrics:
-       - Simple ROI: (Final Roth - Final Trad) / Converted Amount
-       - Annualized ROI: ((Final / Initial) ^ (1/years)) - 1
-       - ROI on tax debit: Gain / Tax Paid
-       - Incremental ROI: Excess return vs. baseline stock return
-
-    4. Add real dollar tracking:
-       - Inflation-adjust all values to current year dollars
-       - Show both nominal and real at each age
-       - Emphasize real dollar surplus (prevents "money illusion")
-
-    5. Visualization enhancements:
-       - Line chart: Wealth differential over time
-       - Color coding: Red (behind), Yellow (catching up), Green (ahead)
-       - Annotations: "Conversion tax debit", "RMDs begin", "Breakeven"
-       - Area chart showing accumulating advantage
-
-    Display Messages Based on Results:
-
-    - If breakeven < 85: "Great! Conversion pays off well before typical life expectancy"
-    - If breakeven 85-92: "Modest advantage by age 85, breaks even by age X"
-    - If breakeven > 92: "Long wait for payoff. Consider if tax rates might rise."
-    - If no breakeven by 100: "Traditional likely better - conversion doesn't pay off"
-
-    - If liquidation surplus at 85 > $50k: "Strong emergency liquidity advantage"
-    - If liquidation surplus at 85 $10k-50k: "Moderate liquidity benefit"
-    - If liquidation surplus at 85 < $10k: "Minimal benefit until very old age"
-
-    McQuarrie's "Glass Half-Full/Half-Empty" Framing:
-
-    Half-Full:
-    - Even constant tax rates produce wealth gain
-    - Intertemporal tax arbitrage works without favorable rate changes
-    - Liquidation advantage exists by age 85
-    - Incremental ROI (1-2%) beats market without extra risk
-    - ROI on tax debit is excellent
-
-    Half-Empty:
-    - Takes until age 92 to break even (27 years)
-    - Absolute dollar gains are small relative to conversion amount
-    - Only $42k real gain by age 100 on $100k converted
-    - Clients may be "underwhelmed by pace"
-    - Pre-mid-90s, advantage is modest
-
-    Calculator Should Present Both Sides:
-    - Show numbers objectively
-    - Let user decide if pace/magnitude is worthwhile
-    - Context: "This beats market by X% without risk"
-    - Context: "But takes Y years to break even"
-
-    Benefits of Implementation:
-    - More nuanced understanding of conversion dynamics
-    - Shows not just IF but WHEN and HOW MUCH
-    - Helps set realistic expectations
-    - Supports "emergency liquidity" use case
-    - Multiple ROI perspectives for different decision frames
-
-    Trade-offs:
-    - Significantly more complex display
-    - May overwhelm users with detail
-    - Requires liquidation value calculations
-    - Need to model capital gains on reinvested RMDs
-    - More computational overhead
-
-    References:
-    - McQuarrie (2021) Figure 3: "Reduction in taxable AGI from conversion"
-    - McQuarrie (2021) Figure 4: "Pre-tax breakeven point"
-    - McQuarrie (2021) Table 4: "Base case outcomes" (liquidation results)
-    - McQuarrie discussion of "glass half-full/half-empty" framing
-    -->
 </body>
 </html>
